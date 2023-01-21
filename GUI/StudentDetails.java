@@ -6,17 +6,16 @@ package GUI;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import Classes.*;
+//import Classes.*;
  
 // Main class
 public class StudentDetails{
-    private Object a;
-   
-   
+    //private Object a;
+ 
     public void writeDetails(String s){
         
         try {
-            String h= s.toString(); 
+            //String h= s.toString(); 
             BufferedWriter f_writer
                 = new BufferedWriter(new FileWriter(
                     "loginDetails.txt"));

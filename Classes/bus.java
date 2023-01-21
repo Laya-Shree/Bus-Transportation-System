@@ -2,9 +2,9 @@ package Classes;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+// import java.util.Date;
 import java.util.GregorianCalendar;
-import Classes.Address;
+// import Classes.Address;
 
 
 public class bus {
@@ -73,7 +73,7 @@ public class bus {
     
     @Override
     public String toString() {
-        return busNumber + "," + travelDate + ","  +  travelTime + "," + arrivalTime ;
+        return busNumber + "," + travelDate + ","  +  travelTime ;
     }
    
     

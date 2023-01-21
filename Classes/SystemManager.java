@@ -1,12 +1,12 @@
 package Classes;
 
-import GUI.*;
+// import GUI.*;
 import java.io.*;
-import java.util.Arrays;
+// import java.util.Arrays;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+// import java.util.logging.Level;
+// import java.util.logging.Logger;
+// import javax.swing.JOptionPane;
 
 public class SystemManager {
    
@@ -62,17 +62,17 @@ public class SystemManager {
         //This Method reads all fhtDetails from the relevant inputFile and writes them in an array
     public final void readBusDetails(){
         
-        bus[] b = new bus[40];
+        //bus[] b = new bus[40];
         String[] busDetails = new String[6];
         String busNumber = "";
         String[] travelDate = new String[3];
-        String location = "";
         //String destinationAirport = "" ;
         String travelTime = "";
         
         int i = 0;
         
         try(Scanner read = new Scanner(new FileInputStream(this.inputFile));
+
             PrintWriter pw = new PrintWriter(new FileOutputStream("bus.txt"))){
         
             boolean end = false;
@@ -88,7 +88,7 @@ public class SystemManager {
                      int deptDay = Integer.parseInt(travelDate[0]);
                      int deptMonth = Integer.parseInt(travelDate[1]);
                      int deptYear = Integer.parseInt(travelDate[2]);
-                     location = busDetails[2];
+                     //String location = busDetails[2];
                      //destinationAirport = ftDetails[3]; 
                      travelTime = busDetails[4];
                      
@@ -214,14 +214,14 @@ public class SystemManager {
     {
 //      boolean end = false;
 //      int i=0;
-      String alineID = "";      
+    //   String alineID = "";      
       bus bus1 = new bus();
       bus1.setTravelDate(day, month, year);
       int availableSeatCount = 0;
       String str = "";
       
       for(int i=0; i<bus.length; i++){
-          alineID = bus[i].getBusNumber().substring(0,2);
+        //   alineID = bus[i].getBusNumber().substring(0,2);
           
           //if(alineID.compareTo(getBusNumber) == 0){
             //  if(bus[i].getTravelAirport().compareTo(TravelAirport) == 0 && bus[i].getDestinationAirport().compareTo(destinationAirport) == 0){
@@ -245,8 +245,8 @@ public class SystemManager {
     //gives the number of seats available to reserve in a particu
     public String searchBusSeatAvailability(String BusNumber){
         Seat[][] seat = this.getSeat();
-        String seatID = "";
-        boolean seatAvailability = false;
+        // String seatID = "";
+        // boolean seatAvailability = false;
         int availableFClass = 0;
         int availableBClass = 0;
         int availableEClass = 0;
@@ -343,11 +343,11 @@ public class SystemManager {
             //PrintWriter pw = new PrintWriter(new FileOutputStream("airport.txt"))){
             String[] reserveDetails = new String[6];
             boolean end = false;
-            int resNumber;            
+            // int resNumber;            
             int numberOfStudents = 0;
             Student[] student = new Student[numberOfStudents];
-            String busNumber = "";
-            String TravelDate = "";
+            // String busNumber = "";
+            // String TravelDate = "";
             String[] reservedseatId;
             String[] StudentDetails = new String[numberOfStudents];
             String[] singleStudentDetails = new String[5];
@@ -361,25 +361,25 @@ public class SystemManager {
                     while(!read.hasNext("##")){                        
                         for(int q=0; q<=reservationNumber; q++){
                             reserveDetails=read.nextLine().split("*");
-                            resNumber = Integer.parseInt(reserveDetails[0]);
+                            // resNumber = Integer.parseInt(reserveDetails[0]);
                             numberOfStudents = Integer.parseInt(reserveDetails[1]);
                             
                              StudentDetails = reserveDetails[2].substring(1, reserveDetails[2].length()).split(", ");        //check
                             for(int d=0; d<StudentDetails.length; d++){
                                 singleStudentDetails = StudentDetails[d].split("@");
-                                Name name = new Name(singleStudentDetails[0], singleStudentDetails[1]);
-                                Address address = new Address(singleStudentDetails[2], singleStudentDetails[3]);
+                                //Name name = new Name(singleStudentDetails[0], singleStudentDetails[1]);
+                                //Address address = new Address(singleStudentDetails[2], singleStudentDetails[3]);
                                 String id = "";
                                 student[d] = new Student(singleStudentDetails[0], singleStudentDetails[1],id,singleStudentDetails[2], singleStudentDetails[3],singleStudentDetails[4]);
                             }
-                            busNumber = reserveDetails[3];
-                            TravelDate = reserveDetails[4];                            
+                            // String busNumber = reserveDetails[3];
+                        //    String TravelDate = reserveDetails[4];                            
                              reservedseatId = reserveDetails[5].substring(1, reserveDetails[5].length()).split(", ");      //check
                             for(int x=0; x<reservedseatId.length; x++){
                                 reservedSeats[x] = new Seat(reservedseatId[x],true);  
                             }
                             
-                            Reservation reserve = new Reservation(reservationNumber,numberOfStudents, student, busNumber, TravelDate,reservedSeats);
+                            //Reservation reserve = new Reservation(reservationNumber,numberOfStudents, student, busNumber, TravelDate,reservedSeats);
                         }
                     }
                     end = true; 
@@ -415,7 +415,7 @@ public class SystemManager {
         public Student[] viewStudentList(String busNumber){
             String ftID = "";            
             Student[] student = new Student[448];
-            int StudentCount = 0;
+            //int StudentCount = 0;
             for(int i=0; i<=reservationNumber; i++){
                 ftID = reservations[i].getBusNumber();
                 if(ftID.compareTo(busNumber)==0){
