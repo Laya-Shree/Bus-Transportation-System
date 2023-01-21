@@ -1,5 +1,7 @@
 package GUI;
 import javax.swing.JOptionPane;
+import java.awt.Color;
+
 
 public class AdminLogin extends javax.swing.JFrame {
 
@@ -60,6 +62,18 @@ public class AdminLogin extends javax.swing.JFrame {
         getContentPane().add(passwordText);
         passwordText.setBounds(280, 180, 123, 30);
 
+        //Cancel Button
+        btnCancel.setBackground(new Color(37, 150, 190));
+        btnCancel.setForeground(Color.WHITE);
+        btnCancel.setUI(new StyledButtonUI());
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancel.setBackground(new Color(27, 119, 152));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancel.setBackground(new Color(37, 150, 190));
+            }
+        });
         btnCancel.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnCancel.setText("Back");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +90,18 @@ public class AdminLogin extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(250, 20, 200, 50);
 
+        //Login Button
+        btnLogin.setBackground(new Color(37, 150, 190));
+        btnLogin.setForeground(Color.WHITE);
+        btnLogin.setUI(new StyledButtonUI());
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLogin.setBackground(new Color(27, 119, 152));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLogin.setBackground(new Color(37, 150, 190));
+            }
+        });
         btnLogin.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {

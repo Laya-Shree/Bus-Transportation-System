@@ -24,21 +24,6 @@ public class DriverForm extends javax.swing.JFrame {
    
      public static SystemManager manager ;
     
-   /*   public DriverForm1() {
-         initComponents();
-         
-         construct();
-         
-          manager = new SystemManager("businfo.txt");
-     }
-     
-     public DriverForm1(String file) {
-         initComponents();
-         
-         construct();
-         
-         manager = new SystemManager(file);
-     }*/
      public DriverForm() {
         initComponents();
         
@@ -46,23 +31,7 @@ public class DriverForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    //  private void construct()
-    //  {
-    //      //DD::: setup the footer notification area with live date and time along with setting the window to maximized state
-         
-    //      this.setExtendedState( this.getExtendedState()|JFrame.MAXIMIZED_BOTH );
-         
-    //       //Start Timer
-    //      final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    //      int interval = 1000; // 1000 ms
-    //      new Timer(interval, new ActionListener() {
-    //          @Override
-    //          public void actionPerformed(ActionEvent e) {
-    //              Calendar now = Calendar.getInstance();
-    //              lblNow.setText(dateFormat.format(now.getTime()));
-    //          }
-    //      }).start();
-    //  }
+   
     
     private void initComponents() {
 
@@ -70,6 +39,7 @@ public class DriverForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
       
         btnAttendance = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
 
@@ -86,7 +56,40 @@ public class DriverForm extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(270, 150, 250, 20);
 
-        
+        //Back Button
+        btnBack.setBackground(new Color(112, 161, 180));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setUI(new StyledButtonUI());
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnBack.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(10, 10, 90, 32);
+
+        //Attendence Button
+        btnAttendance.setBackground(new Color(112, 161, 180));
+        btnAttendance.setForeground(Color.WHITE);
+        btnAttendance.setUI(new StyledButtonUI());
+        btnAttendance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAttendance.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAttendance.setBackground(new Color(112, 161, 180));
+            }
+        });
         btnAttendance.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnAttendance.setText("Click to view");
         btnAttendance.setBackground(new Color(112,148,156));
@@ -118,16 +121,17 @@ public class DriverForm extends javax.swing.JFrame {
         pack();
     }
     
-    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
+        DriverLogin ss = new DriverLogin();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
         
     }
-    // private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {
         
-    // }
-    // private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {
-        
-    // }
+    }
+   
 
 
      public static void main(String args[]) {
@@ -161,6 +165,7 @@ public class DriverForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     //private javax.swing.JLabel lblNow;
     private javax.swing.JButton btnAttendance;
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;

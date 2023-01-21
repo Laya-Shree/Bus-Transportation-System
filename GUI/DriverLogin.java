@@ -2,6 +2,8 @@ package GUI;
 import java.util.Scanner;
 import java.io.*;
 import javax.swing.JOptionPane;
+import java.awt.Color;
+
 
 public class DriverLogin extends javax.swing.JFrame {
 
@@ -64,6 +66,18 @@ public class DriverLogin extends javax.swing.JFrame {
         getContentPane().add(passwordText);
         passwordText.setBounds(280, 180, 123, 30);
 
+        //Cancel Button
+        btnCancel.setBackground(new Color(37, 150, 190));
+        btnCancel.setForeground(Color.WHITE);
+        btnCancel.setUI(new StyledButtonUI());
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancel.setBackground(new Color(27, 119, 152));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancel.setBackground(new Color(37, 150, 190));
+            }
+        });
         btnCancel.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnCancel.setText("Back");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +94,18 @@ public class DriverLogin extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(250, 20, 200, 50);
 
+        //Login Button
+        btnLogin.setBackground(new Color(37, 150, 190));
+        btnLogin.setForeground(Color.WHITE);
+        btnLogin.setUI(new StyledButtonUI());
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLogin.setBackground(new Color(27, 119, 152));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLogin.setBackground(new Color(37, 150, 190));
+            }
+        });
         btnLogin.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +116,18 @@ public class DriverLogin extends javax.swing.JFrame {
         getContentPane().add(btnLogin);
         btnLogin.setBounds(430, 145, 90, 32);
 
-
+        //New User Button
+        btnNewUser.setBackground(new Color(37, 150, 190));
+        btnNewUser.setForeground(Color.WHITE);
+        btnNewUser.setUI(new StyledButtonUI());
+        btnNewUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNewUser.setBackground(new Color(27, 119, 152));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNewUser.setBackground(new Color(37, 150, 190));
+            }
+        });
         btnNewUser.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnNewUser.setText("New User");
         btnNewUser.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +167,7 @@ public class DriverLogin extends javax.swing.JFrame {
     }
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
+        username = usernameText.getText();
         passWord = passwordText.getPassword();
         String p = new String(passWord);
         String[] loginDetails = new String[2];
@@ -157,7 +195,7 @@ public class DriverLogin extends javax.swing.JFrame {
                             }
 	    	}
             if(end){
-                JOptionPane.showMessageDialog(null, "Invalid login credentials. Please try again.");
+                JOptionPane.showMessageDialog(null, "Invalid login credentials. Please try again."+username);
             }
 	    }
 	    catch(FileNotFoundException ex){

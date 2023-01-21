@@ -81,6 +81,7 @@ public class StudentForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnBook = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
         btnAttendance = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
@@ -111,6 +112,40 @@ public class StudentForm extends javax.swing.JFrame {
         jLabel3.setBounds(304, 330, 150, 19);
         jLabel3.setForeground(Color.white);
 
+        //Back Button
+        btnBack.setBackground(new Color(112, 161, 180));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setUI(new StyledButtonUI());
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnBack.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(10, 10, 90, 32);
+
+        //Booking Button
+        btnBook.setBackground(new Color(112, 161, 180));
+        btnBook.setForeground(Color.WHITE);
+        btnBook.setUI(new StyledButtonUI());
+        btnBook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBook.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBook.setBackground(new Color(112, 161, 180));
+            }
+        });
         btnBook.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnBook.setText("Book Seat");
         btnBook.addActionListener(new java.awt.event.ActionListener() {
@@ -120,9 +155,21 @@ public class StudentForm extends javax.swing.JFrame {
         });
         getContentPane().add(btnBook);
         btnBook.setBounds(290, 170, 90, 32);
-        btnBook.setBackground(new Color(112,148,156));
-        btnBook.setForeground(Color.white);
-
+        //btnBook.setBackground(new Color(112,148,156));
+        //btnBook.setForeground(Color.white);
+        
+        //Bus Details Button
+        btnDetails.setBackground(new Color(112, 161, 180));
+        btnDetails.setForeground(Color.WHITE);
+        btnDetails.setUI(new StyledButtonUI());
+        btnDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetails.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetails.setBackground(new Color(112, 161, 180));
+            }
+        });
         btnDetails.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnDetails.setText("Bus Details");
         btnDetails.addActionListener(new java.awt.event.ActionListener() {
@@ -132,9 +179,21 @@ public class StudentForm extends javax.swing.JFrame {
         });
         getContentPane().add(btnDetails);
         btnDetails.setBounds(270, 260, 150, 32);
-        btnDetails.setBackground(new Color(112,148,156));
-        btnDetails.setForeground(Color.white);
+        //btnDetails.setBackground(new Color(112,148,156));
+        //btnDetails.setForeground(Color.white);
         
+        //Attendence Button
+        btnAttendance.setBackground(new Color(112, 161, 180));
+        btnAttendance.setForeground(Color.WHITE);
+        btnAttendance.setUI(new StyledButtonUI());
+        btnAttendance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAttendance.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAttendance.setBackground(new Color(112, 161, 180));
+            }
+        });
         btnAttendance.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnAttendance.setText("Mark Attendance");
         btnAttendance.addActionListener(new java.awt.event.ActionListener() {
@@ -144,9 +203,9 @@ public class StudentForm extends javax.swing.JFrame {
         });
         getContentPane().add(btnAttendance);
         btnAttendance.setBounds(270, 350, 150, 32);
-        getContentPane().setBackground(new Color(23,12,74));
-        btnAttendance.setBackground(new Color(112,148,156));
-        btnAttendance.setForeground(Color.white);
+        //getContentPane().setBackground(new Color(23,12,74));
+        //btnAttendance.setBackground(new Color(112,148,156));
+        //btnAttendance.setForeground(Color.white);
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,6 +224,13 @@ public class StudentForm extends javax.swing.JFrame {
         pack();
     }
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
+        StudentLogin ss = new StudentLogin();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
+        
+    }
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {
         SeatSystem ss = new SeatSystem();
         ss.setVisible(true);
@@ -237,6 +303,7 @@ catch(Exception ex){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     //private javax.swing.JLabel lblNow;
     private javax.swing.JButton btnBook;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnAttendance;
     private javax.swing.JLabel jLabel1;

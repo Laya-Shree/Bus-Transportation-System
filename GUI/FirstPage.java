@@ -1,4 +1,6 @@
 package GUI;
+import java.awt.Color;
+
 
 public class FirstPage extends javax.swing.JFrame {
 
@@ -37,6 +39,17 @@ public class FirstPage extends javax.swing.JFrame {
 
 
         //Student Button
+        btnStudent.setBackground(new Color(37, 150, 190));
+        btnStudent.setForeground(Color.WHITE);
+        btnStudent.setUI(new StyledButtonUI());
+        btnStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnStudent.setBackground(new Color(27, 119, 152));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnStudent.setBackground(new Color(37, 150, 190));
+            }
+        });
         btnStudent.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnStudent.setText("Student");
         btnStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -48,6 +61,17 @@ public class FirstPage extends javax.swing.JFrame {
         btnStudent.setBounds(150, 100, 90, 32);
 
         //Driver Button
+        btnDriver.setBackground(new Color(37, 150, 190));
+        btnDriver.setForeground(Color.WHITE);
+        btnDriver.setUI(new StyledButtonUI());
+        btnDriver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDriver.setBackground(new Color(27, 119, 152));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDriver.setBackground(new Color(37, 150, 190));
+            }
+        });
         btnDriver.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnDriver.setText("Driver");
         btnDriver.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +83,17 @@ public class FirstPage extends javax.swing.JFrame {
         btnDriver.setBounds(300, 100, 90, 32);
 
         //Admin Button
+        btnAdmin.setBackground(new Color(37, 150, 190));
+        btnAdmin.setForeground(Color.WHITE);
+        btnAdmin.setUI(new StyledButtonUI());
+        btnAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAdmin.setBackground(new Color(27, 119, 152));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAdmin.setBackground(new Color(37, 150, 190));
+            }
+        });
         btnAdmin.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnAdmin.setText("Admin");
         btnAdmin.addActionListener(new java.awt.event.ActionListener() {

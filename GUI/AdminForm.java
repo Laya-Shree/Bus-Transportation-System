@@ -64,6 +64,7 @@ public class AdminForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnStudent = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         btnAnnouncements = new javax.swing.JButton();
         btnFee = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
@@ -94,7 +95,40 @@ public class AdminForm extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(294, 330, 170, 19);
 
-        
+        //Back Button
+        btnBack.setBackground(new Color(112, 161, 180));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setUI(new StyledButtonUI());
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnBack.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(10, 10, 90, 32);
+
+        //Student Details Button
+        btnStudent.setBackground(new Color(112, 161, 180));
+        btnStudent.setForeground(Color.WHITE);
+        btnStudent.setUI(new StyledButtonUI());
+        btnStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnStudent.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnStudent.setBackground(new Color(112, 161, 180));
+            }
+        });
         btnStudent.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnStudent.setText("View details");
         btnStudent.setBackground(new Color(112,148,156));
@@ -107,7 +141,18 @@ public class AdminForm extends javax.swing.JFrame {
         getContentPane().add(btnStudent);
         btnStudent.setBounds(290, 170, 150, 32);
 
-
+        //View Fee Button
+        btnFee.setBackground(new Color(112, 161, 180));
+        btnFee.setForeground(Color.WHITE);
+        btnFee.setUI(new StyledButtonUI());
+        btnFee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFee.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFee.setBackground(new Color(112, 161, 180));
+            }
+        });
         btnFee.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnFee.setText("View Fee");
         btnFee.setBackground(new Color(112,148,156));
@@ -121,7 +166,19 @@ public class AdminForm extends javax.swing.JFrame {
         });
         getContentPane().add(btnFee);
         btnFee.setBounds(290, 260, 150, 32);
-      
+
+        //Announcement Button
+        btnAnnouncements.setBackground(new Color(112, 161, 180));
+        btnAnnouncements.setForeground(Color.WHITE);
+        btnAnnouncements.setUI(new StyledButtonUI());
+        btnAnnouncements.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAnnouncements.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAnnouncements.setBackground(new Color(112, 161, 180));
+            }
+        });
         btnAnnouncements.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnAnnouncements.setText("Click to see Announcements");
         btnAnnouncements.setBackground(new Color(112,148,156));
@@ -151,6 +208,12 @@ public class AdminForm extends javax.swing.JFrame {
         pack();
     }
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
+        AdminLogin ss = new AdminLogin();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
+    }
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {
     }
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +299,7 @@ catch(Exception ex){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     //private javax.swing.JLabel lblNow;
     private javax.swing.JButton btnStudent;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnFee;
     private javax.swing.JButton btnAnnouncements;
     private javax.swing.JLabel jLabel1;
