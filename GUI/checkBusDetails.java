@@ -4,7 +4,7 @@ package GUI;
 // import java.awt.event.ActionEvent;
 // import java.awt.event.ActionListener;
 // import java.awt.image.BufferedImage;
-// import java.awt.Color;
+ import java.awt.Color;
 // import java.net.URL;
 // import java.text.DateFormat;
 // import java.text.SimpleDateFormat;
@@ -64,6 +64,7 @@ public class checkBusDetails extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
+        busDetails = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Page | Ride With Us");
@@ -79,11 +80,34 @@ public class checkBusDetails extends javax.swing.JFrame {
         //busDetails.setBounds(30,40,200,300);
 
        // JScrollPane sp=new JScrollPane(busDetails);
-        getContentPane().add(busDetails);
         busDetails.setBounds(180,180,300,90);
+        getContentPane().add(busDetails);
         //getContentPane().setSize(300,400);
         
         setVisible(true);
+
+        //Back Button
+        btnBack.setBackground(new Color(112, 161, 180));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setUI(new StyledButtonUI());
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnBack.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(10, 10, 90, 32);
+        
         
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,15 +125,6 @@ public class checkBusDetails extends javax.swing.JFrame {
                 .addComponent(panelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pack();
-        btnBack.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBack);
-        btnBack.setBounds(450, 100, 90, 32);
         
     }
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
