@@ -72,7 +72,7 @@ public class FirstPage extends javax.swing.JFrame {
                 btnDriver.setBackground(new Color(37, 150, 190));
             }
         });
-        btnDriver.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        btnDriver.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnDriver.setText("Driver");
         btnDriver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +94,7 @@ public class FirstPage extends javax.swing.JFrame {
                 btnAdmin.setBackground(new Color(37, 150, 190));
             }
         });
-        btnAdmin.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        btnAdmin.setFont(new java.awt.Font("SansSerif", 0, 12));
         btnAdmin.setText("Admin");
         btnAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
