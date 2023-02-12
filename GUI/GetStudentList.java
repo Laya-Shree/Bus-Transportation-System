@@ -1,47 +1,24 @@
 
 package GUI;
-// import java.awt.Graphics;
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
-// import java.awt.image.BufferedImage;
+// import java.awt.BorderLayout;
 import java.awt.Color;
-// import java.net.URL;
+import java.sql.*;
+
+import javax.swing.JButton;
 // import java.text.DateFormat;
 // import java.text.SimpleDateFormat;
 // import java.util.Calendar;
-// import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-// import javax.swing.JInternalFrame;
-// import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 // import javax.swing.Timer;
-// import java.io.*;
-// import javax.swing.*;
+// import javax.swing.JScrollPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
-// import Classes.*;
 
 public class GetStudentList extends javax.swing.JFrame {
         
-    /**
-     * Creates new form StudentNew
-     */
-   
-     //public static SystemManager manager ;
     
-   /*   public StudentForm1() {
-         initComponents();
-         
-         construct();
-         
-          manager = new SystemManager("businfo.txt");
-     }
-     
-     public StudentForm1(String file) {
-         initComponents();
-         
-         construct();
-         
-         manager = new SystemManager(file);
-     }*/
      JFrame f;
      public GetStudentList() {
         initComponents();
@@ -52,40 +29,67 @@ public class GetStudentList extends javax.swing.JFrame {
     }
   
     private void initComponents() {
-
+        int rows=0;
 
         // lblNow = new javax.swing.JLabel();
-        btnBack = new javax.swing.JButton();
+        JButton btnBack = new JButton();
+        JPanel panelStatus = new JPanel();
         dp = new javax.swing.JDesktopPane();
-        panelStatus = new javax.swing.JPanel();
+        JScrollPane s = new JScrollPane(f);
+        getContentPane().add(s);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(707, 569));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1900,990));
+        setResizable(true);
         getContentPane().setLayout(null);
-
-        String data[][]={{"First Name","Last Name","ID","City","Street","Phone No"},{"Ria","Sanjay","2021A7PS0025U","Dubai","DSO","12264782"},{"Ilfa","Shaheed","2021A7PS0048U","Dubai","Al Nahda","123467"}};
-        String column[]={"Student First Name","Student Last Name","ID","City","Street","Phone No"};
-        busDetails=new javax.swing.JTable(data,column);
-        busDetails.setBounds(30,40,2000,50);
-        busDetails.setShowGrid(true);
-        //busDetails.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-/*busDetails.getColumnModel().getColumn(1).setPreferredWidth(400);
-busDetails.getColumnModel().getColumn(2).setPreferredWidth(500);
-busDetails.getColumnModel().getColumn(4).setPreferredWidth(600);
-busDetails.getColumnModel().getColumn(5).setPreferredWidth(300);
-*/
-
-
-       // JScrollPane sp=new JScrollPane(busDetails);
-        getContentPane().add(busDetails);
-        busDetails.setBounds(180,180,350,90);
-        //getContentPane().setSize(300,400);
         
+        //sql
+        
+        try{  
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            Statement stmt=con.createStatement();  
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM student");
+            rs.next();
+            rows = rs.getInt(1);
+            String data[][] = new String[rows][];  
+
+            ResultSet rs1=stmt.executeQuery("SELECT * FROM student");
+            int j=0;
+            while(rs1.next()){
+                String entry[]= new String[5];
+                for(int i =0; i<5; i++){
+                    entry[i] = rs1.getString(i+1);
+                }
+                data[j]=entry;
+                j++;
+            }  
+            String column[]={"Student Name","Adress","Contact No.","Bus No.","ID"};
+            JTable studentDetails = new JTable(data,column);
+            JScrollPane sp=new JScrollPane(studentDetails);
+            sp.setBounds(180,180,1500,500);
+            getContentPane().add(sp);
+            setVisible(true);
+            con.close();  
+        }catch(Exception e){System.out.println(e);}  
+
+
+        //back button
         setVisible(true);
-        
+        btnBack.setBackground(new Color(112, 161, 180));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setUI(new StyledButtonUI());
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack.setBackground(new Color(112, 161, 180));
+            }
+        });
         btnBack.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +101,9 @@ busDetails.getColumnModel().getColumn(5).setPreferredWidth(300);
         btnBack.setBackground(new Color(112,148,156));
         btnBack.setForeground(Color.white);
         getContentPane().add(btnBack);
-        btnBack.setBounds(300, 300, 90, 32);
+        btnBack.setBounds(10, 10, 90, 32);
+
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,10 +121,11 @@ busDetails.getColumnModel().getColumn(5).setPreferredWidth(300);
         
        
         pack();
+
     }
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
         
-        StudentForm lf = new StudentForm();
+        AdminForm lf = new AdminForm();
         lf.setVisible(true);
         lf.pack();
         this.dispose();
@@ -155,12 +162,9 @@ busDetails.getColumnModel().getColumn(5).setPreferredWidth(300);
         
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration
     // private javax.swing.JLabel lblNow;
-    private javax.swing.JTable busDetails;
     private javax.swing.JDesktopPane dp;
-    private javax.swing.JPanel panelStatus;
-    private javax.swing.JButton btnBack;
     // End of variables declaration//GEN-END:variables
 }
 

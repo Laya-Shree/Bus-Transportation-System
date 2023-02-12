@@ -11,6 +11,7 @@ public class StudentLogin extends javax.swing.JFrame {
      */
     String username = "";
     String passWord = "";
+    Student s = new Student();
     
     public StudentLogin() {
         initComponents();
@@ -180,13 +181,12 @@ public class StudentLogin extends javax.swing.JFrame {
 		while(read.hasNextLine()&& end){
 
 			loginDetails = read.nextLine().split(",");
-			//String x = loginDetails[0];
-            //int len = username.length();
             userNamef=loginDetails[0];
-			passwordf = loginDetails[6];
+			passwordf = loginDetails[1];
 
                         
                         if(userNamef.compareTo(usernamei)==0 && passwordf.compareTo(p)==0){
+                            s.setStudent(userNamef);
                             StudentForm lf = new StudentForm();
                             lf.setVisible(true);
                             lf.pack();

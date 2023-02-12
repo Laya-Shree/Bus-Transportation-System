@@ -1,11 +1,1 @@
-abc,abcdef,1234,ashdhi,dubai,123456,hello
-ria,sanjay,12345,dso,dubai,123,asdf
-ria,sanjay,123,dso,dubai,1234,asdf
-ria,sanjay,122,dso,dubai,12334,q45
-ria,sanjay,1223,dso,dubai,123455,ghj
-Laya,Elango,2021,rolla,Sharjah,050,yui
-LayaShree,Elango,2021,rolla,Shj,050,Bye
-name,lname,id,street,city,phno,pswdRia,Sanjay,2021A7PS0025U,dso,dubai,123456,123
-ria,sanjay ,2021A7PS0025U,dso,dubai,123456,123
-ria,ssanjay,2021A7PS0025U,dso,DUBAI,12345,123
-Angela,Arul,2021A7PS0005U,Al Qusais,Dubai,0507784610,789
+2021A7PS0004U,123

@@ -1,8 +1,10 @@
 
 package GUI;
+import java.sql.*;
 // import java.awt.Graphics;
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.*;
+ import java.awt.event.ActionListener;
 // import java.awt.image.BufferedImage;
  import java.awt.Color;
 // import java.net.URL;
@@ -15,9 +17,11 @@ package GUI;
 // import javax.swing.JOptionPane;
 // import javax.swing.Timer;
 // import java.io.*;
-// import javax.swing.*;
+import javax.swing.*;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 // import Classes.*;
 /**
@@ -26,27 +30,7 @@ import javax.swing.JFrame;
  */
 public class checkBusDetails extends javax.swing.JFrame {
         
-    /**
-     * Creates new form StudentNew
-     */
-   
-     //public static SystemManager manager ;
-    
-   /*   public StudentForm1() {
-         initComponents();
-         
-         construct();
-         
-          manager = new SystemManager("businfo.txt");
-     }
-     
-     public StudentForm1(String file) {
-         initComponents();
-         
-         construct();
-         
-         manager = new SystemManager(file);
-     }*/
+
      JFrame f;
      public checkBusDetails() {
         initComponents();
@@ -61,47 +45,67 @@ public class checkBusDetails extends javax.swing.JFrame {
 
 
         // lblNow = new javax.swing.JLabel();
-        btnBack = new javax.swing.JButton();
-        dp = new javax.swing.JDesktopPane();
-        panelStatus = new javax.swing.JPanel();
-        busDetails = new javax.swing.JTable();
+        btnBack = new JButton();
+        dp = new JDesktopPane();
+        panelStatus = new JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(707, 569));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1900,990));
+        setResizable(true);
         getContentPane().setLayout(null);
-
-        String data[][]={{"Bus 5","24 feb 2021","al nahda","5:20"},{"Bus 6","24 feb 2021","al nahda","5:20",""},
-        {"Bus 2","24 feb 2021","al nahda","5:20"},{"Bus 1","24 feb 2021","al nahda","5:20"}};
-        String column[]={"Bus No","Date","Location","Travel Time"};
-        busDetails=new javax.swing.JTable(data,column);
-        //busDetails.setBounds(30,40,200,300);
-
-       // JScrollPane sp=new JScrollPane(busDetails);
-        busDetails.setBounds(180,180,300,90);
-        getContentPane().add(busDetails);
-        //getContentPane().setSize(300,400);
+        //sql
         
-        setVisible(true);
+        try{ 
+            int rows; 
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            Statement stmt=con.createStatement();  
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM bus");
+            rs.next();
+            rows = rs.getInt(1);
+            String data[][] = new String[rows][];  
 
+            ResultSet rs1=stmt.executeQuery("SELECT * FROM bus");
+            int j=0;
+            while(rs1.next()){
+                String entry[]= new String[4];
+                for(int i =0; i<4; i++){
+                    entry[i] = rs1.getString(i+1);
+                }
+                data[j]=entry;
+                j++;
+            }  
+            String column[]={"Bus Number","Driver Name","Driver Contact No.","Area Covered"};
+            JTable studentDetails = new JTable(data,column);
+            JScrollPane sp=new JScrollPane(studentDetails);
+            sp.setBounds(180,180,1500,500);
+            getContentPane().add(sp);
+            setVisible(true);
+            con.close();  
+        }catch(Exception e){System.out.println(e);}  
+
+        
+       
+     
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
         btnBack.setForeground(Color.WHITE);
         btnBack.setUI(new StyledButtonUI());
-        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+        btnBack.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
                 btnBack.setBackground(new Color(92, 132, 147));
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(MouseEvent evt) {
                 btnBack.setBackground(new Color(112, 161, 180));
             }
         });
         btnBack.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
@@ -110,24 +114,24 @@ public class checkBusDetails extends javax.swing.JFrame {
         
         
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(panelStatus, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(dp)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(dp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelStatus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pack();
         
     }
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBackActionPerformed(ActionEvent evt) {
         StudentForm lf = new StudentForm();
         lf.setVisible(true);
         lf.pack();
@@ -165,7 +169,6 @@ public class checkBusDetails extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // private javax.swing.JLabel lblNow;
-    private javax.swing.JTable busDetails;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     private javax.swing.JButton btnBack;

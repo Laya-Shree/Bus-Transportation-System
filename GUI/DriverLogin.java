@@ -8,7 +8,7 @@ import java.awt.Color;
 public class DriverLogin extends javax.swing.JFrame {
 
     // Creates new form DriverLogin
-     
+    Driver d = new Driver();
     String username = "";
     char[] passWord ;
     
@@ -135,7 +135,7 @@ public class DriverLogin extends javax.swing.JFrame {
                 btnNewUserActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNewUser);
+        //getContentPane().add(btnNewUser);
         btnNewUser.setBounds(270, 240, 150, 32);
 
 
@@ -175,16 +175,17 @@ public class DriverLogin extends javax.swing.JFrame {
 	    String password = "";
         
 	    try(Scanner read = new Scanner(new FileInputStream("DloginDetails.txt"))){
-        
+            
 	    	boolean end = true;
         
-	    	while(read.hasNextLine()&& end){
+	    	while(read.hasNextLine() && end){
 
 	    		loginDetails = read.nextLine().split(",");
 	    		userName = loginDetails[0];
-	    		password = loginDetails[3];
+	    		password = loginDetails[2];
 
                             if(userName.compareTo(username)==0 && password.compareTo(p)==0){
+                                d.setDriver(userName);
                                 DriverForm lf2 = new DriverForm();
                                 lf2.setVisible(true);
                                 lf2.pack();

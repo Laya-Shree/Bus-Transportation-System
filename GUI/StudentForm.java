@@ -1,9 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package GUI;
+import java.sql.*;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 //import java.awt.Graphics;
 // import java.awt.event.ActionEvent;
 // import java.awt.event.ActionListener;
@@ -34,21 +34,7 @@ public class StudentForm extends javax.swing.JFrame {
    
      public static SystemManager manager ;
     
-   /*   public StudentForm1() {
-         initComponents();
-         
-         construct();
-         
-          manager = new SystemManager("businfo.txt");
-     }
-     
-     public StudentForm1(String file) {
-         initComponents();
-         
-         construct();
-         
-         manager = new SystemManager(file);
-     }*/
+   
      public StudentForm() {
         initComponents();
         
@@ -56,31 +42,14 @@ public class StudentForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    //  private void construct()
-    //  {
-    //      //DD::: setup the footer notification area with live date and time along with setting the window to maximized state
-         
-    //      this.setExtendedState( this.getExtendedState()|JFrame.MAXIMIZED_BOTH );
-         
-    //       //Start Timer
-    //      final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    //      int interval = 1000; // 1000 ms
-    //      new Timer(interval, new ActionListener() {
-    //          @Override
-    //          public void actionPerformed(ActionEvent e) {
-    //              Calendar now = Calendar.getInstance();
-    //              lblNow.setText(dateFormat.format(now.getTime()));
-    //          }
-    //      }).start();
-    //  }
-    
+
     private void initComponents() {
 
         //lblNow = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        //jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnBook = new javax.swing.JButton();
+        // btnBook = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
         btnAttendance = new javax.swing.JButton();
@@ -90,26 +59,62 @@ public class StudentForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(707, 569));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1900,990));
+        setResizable(true);
         getContentPane().setLayout(null);
 
-         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel1.setText("Book Your Seats Here ");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(270, 150, 180, 20);
-        jLabel1.setForeground(Color.white);
+        //sql
+        try{ 
+            int rows=0;
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            Statement stmt=con.createStatement();  
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM announcement");
+            rs.next();
+            rows = rs.getInt(1);
+            String data[][] = new String[rows][];  
+
+            ResultSet rs1=stmt.executeQuery("SELECT * FROM announcement");
+            int j=0;
+            while(rs1.next()){
+                String entry[]= new String[3];
+                for(int i =0; i<3; i++){
+                    entry[i] = rs1.getString(i+1);
+                }
+                data[j]=entry;
+                j++;
+            }  
+            String column[]={"Date","Time","Announcement"};
+            JTable studentDetails = new JTable(data,column);
+            studentDetails.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            studentDetails.getColumnModel().getColumn(0).setPreferredWidth(90);
+            studentDetails.getColumnModel().getColumn(1).setPreferredWidth(90);
+            studentDetails.getColumnModel().getColumn(2).setPreferredWidth(620);
+            
+            JScrollPane sp=new JScrollPane(studentDetails);
+            sp.setBounds(1000,180,800,600);
+            getContentPane().add(sp);
+            setVisible(true);
+            con.close();  
+        }catch(Exception e){System.out.println(e+"Here");}  
+
+        // jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        // jLabel1.setText("Book Your Seats Here ");
+        // getContentPane().add(jLabel1);
+        // jLabel1.setBounds(50, 240, 180, 20);
+        // jLabel1.setForeground(Color.white);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); 
         jLabel2.setText("Check Bus Details Here");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(270, 240, 180, 20);
+        jLabel2.setBounds(50,330, 180, 20);
         jLabel2.setForeground(Color.white);
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel3.setText("Attendance");
+        jLabel3.setText("Mark your Attendance");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(304, 330, 150, 19);
+        jLabel3.setBounds(50, 420, 150, 19);
         jLabel3.setForeground(Color.white);
 
         //Back Button
@@ -132,29 +137,29 @@ public class StudentForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack);
-        btnBack.setBounds(10, 10, 90, 32);
+        btnBack.setBounds(10, 10, 100, 32);
 
-        //Booking Button
-        btnBook.setBackground(new Color(112, 161, 180));
-        btnBook.setForeground(Color.WHITE);
-        btnBook.setUI(new StyledButtonUI());
-        btnBook.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBook.setBackground(new Color(92, 132, 147));
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBook.setBackground(new Color(112, 161, 180));
-            }
-        });
-        btnBook.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnBook.setText("Book Seat");
-        btnBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBookActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBook);
-        btnBook.setBounds(290, 170, 90, 32);
+        // //Booking Button
+        // btnBook.setBackground(new Color(112, 161, 180));
+        // btnBook.setForeground(Color.WHITE);
+        // btnBook.setUI(new StyledButtonUI());
+        // btnBook.addMouseListener(new java.awt.event.MouseAdapter() {
+        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+        //         btnBook.setBackground(new Color(92, 132, 147));
+        //     }
+        //     public void mouseExited(java.awt.event.MouseEvent evt) {
+        //         btnBook.setBackground(new Color(112, 161, 180));
+        //     }
+        // });
+        // btnBook.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        // btnBook.setText("Book Seat");
+        // btnBook.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         btnBookActionPerformed(evt);
+        //     }
+        // });
+        // getContentPane().add(btnBook);
+        // btnBook.setBounds(50, 260, 100, 32);
         //btnBook.setBackground(new Color(112,148,156));
         //btnBook.setForeground(Color.white);
         
@@ -178,9 +183,8 @@ public class StudentForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDetails);
-        btnDetails.setBounds(270, 260, 150, 32);
-        //btnDetails.setBackground(new Color(112,148,156));
-        //btnDetails.setForeground(Color.white);
+        btnDetails.setBounds(50, 350, 100, 32);
+
         
         //Attendence Button
         btnAttendance.setBackground(new Color(112, 161, 180));
@@ -195,17 +199,15 @@ public class StudentForm extends javax.swing.JFrame {
             }
         });
         btnAttendance.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnAttendance.setText("Mark Attendance");
+        btnAttendance.setText("Attendance");
         btnAttendance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAttendanceActionPerformed(evt);
             }
         });
         getContentPane().add(btnAttendance);
-        btnAttendance.setBounds(270, 350, 150, 32);
-        //getContentPane().setBackground(new Color(23,12,74));
-        //btnAttendance.setBackground(new Color(112,148,156));
-        //btnAttendance.setForeground(Color.white);
+        btnAttendance.setBounds(50, 440, 100, 32);
+
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,13 +233,7 @@ public class StudentForm extends javax.swing.JFrame {
         this.dispose();
         
     }
-    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {
-        SeatSystem ss = new SeatSystem();
-        ss.setVisible(true);
-        ss.pack();
-        this.dispose();
-        
-    }
+   
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {
         checkBusDetails cb = new checkBusDetails();
         cb.setVisible(true);
@@ -245,7 +241,7 @@ public class StudentForm extends javax.swing.JFrame {
         this.dispose();   
     }
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {
-        GetStudentList sl = new GetStudentList();
+        Absent sl = new Absent();
         sl.setVisible(true);
         sl.pack();
         this.dispose();
@@ -253,60 +249,15 @@ public class StudentForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCancelActionPerformed
 
-/* 	try(PrintWriter write = new PrintWriter(new FileOutputStream("newAccount.txt"))){
-	
-		boolean end = false;
-        //Student s = new Student(FirstN,LastN,Id,street,city,PhoneNo);
-        write.println(FirstNameText.getText()+","+LastNameText.getText()+","+IdText.getText()+","+StreetAddressText.getText()+","+CityAddressText.getText()+","+PhoneNoText.getText());
-	}
-	catch(FileNotFoundException ex){
-		 JOptionPane.showMessageDialog(null,"File Not Found");
-	}
-	catch(Exception ex){
-		 JOptionPane.showMessageDialog(null,ex.getMessage());
-	}
-         
-      
-    }*/
 
-/*try(Scanner read = new Scanner(new FileInputStream("loginDetails.txt"))){
-	
-    boolean end = false;
-    
-    while(read.hasNextLine()&& !end){
-
-        loginDetails = read.nextLine().split(",");
-        userName = loginDetails[0];
-        password = loginDetails[1];
-                    
-                    if(userName.compareTo(username)==0 && password.compareTo(passWord)==0){
-                        LoadFile1 lf = new LoadFile1();
-                        lf.setVisible(true);
-                        lf.pack();
-                        this.dispose();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Invalid login credentials. Please try again.");
-                    }
-    }
-}
-catch(FileNotFoundException ex){
-     JOptionPane.showMessageDialog(null,"File Not Found");
-}
-catch(Exception ex){
-     JOptionPane.showMessageDialog(null,ex.getMessage());
-}
-    
-  
-  
-}*/           
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     //private javax.swing.JLabel lblNow;
-    private javax.swing.JButton btnBook;
+    // private javax.swing.JButton btnBook;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnAttendance;
-    private javax.swing.JLabel jLabel1;
+    //private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JDesktopPane dp;

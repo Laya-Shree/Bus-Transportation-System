@@ -15,6 +15,10 @@ import java.awt.Color;
 // import javax.swing.Timer;
 // import java.io.*;
 // import javax.swing.JOptionPane;
+import java.sql.*;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import Classes.*;
 
@@ -46,15 +50,50 @@ public class DriverForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Driver Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(707, 569));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1900,990));
+        setResizable(true);
         getContentPane().setLayout(null);
 
-         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        try{ 
+            int rows=0;
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            Statement stmt=con.createStatement();  
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM announcement");
+            rs.next();
+            rows = rs.getInt(1);
+            String data[][] = new String[rows][];  
+
+            ResultSet rs1=stmt.executeQuery("SELECT * FROM announcement");
+            int j=0;
+            while(rs1.next()){
+                String entry[]= new String[3];
+                for(int i =0; i<3; i++){
+                    entry[i] = rs1.getString(i+1);
+                }
+                data[j]=entry;
+                j++;
+            }  
+            String column[]={"Date","Time","Announcement"};
+            JTable studentDetails = new JTable(data,column);
+            studentDetails.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            studentDetails.getColumnModel().getColumn(0).setPreferredWidth(90);
+            studentDetails.getColumnModel().getColumn(1).setPreferredWidth(90);
+            studentDetails.getColumnModel().getColumn(2).setPreferredWidth(620);
+            
+            JScrollPane sp=new JScrollPane(studentDetails);
+            sp.setBounds(1000,180,800,600);
+            getContentPane().add(sp);
+            setVisible(true);
+            con.close();  
+        }catch(Exception e){System.out.println(e);}  
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
         jLabel1.setText("View Student Attendance ");
         jLabel1.setForeground(Color.white);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(270, 150, 250, 20);
+        jLabel1.setBounds(396, 350, 250, 20);
 
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
@@ -96,11 +135,11 @@ public class DriverForm extends javax.swing.JFrame {
         btnAttendance.setForeground(Color.white);
         btnAttendance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBookActionPerformed(evt);
+                btnAttendanceActionPerformed(evt);
             }
         });
         getContentPane().add(btnAttendance);
-        btnAttendance.setBounds(290, 170, 140, 32);
+        btnAttendance.setBounds(400, 400, 140, 32);
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,8 +167,11 @@ public class DriverForm extends javax.swing.JFrame {
         this.dispose();
         
     }
-    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {
-        
+    private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {
+        AbsentList ss = new AbsentList();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
     }
    
 

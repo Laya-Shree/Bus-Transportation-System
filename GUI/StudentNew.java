@@ -1,7 +1,10 @@
 package GUI;
 import java.io.*;
+import java.sql.*;
+
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.awt.event.*;
 
 // import Classes.*;
 
@@ -96,56 +99,56 @@ public class StudentNew extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(170, 280, 100, 19);
 
-        FirstNameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        FirstNameText.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 NameTextActionPerformed(evt);
             }
         });
         getContentPane().add(FirstNameText);
         FirstNameText.setBounds(280, 100, 140, 28);
 
-        LastNameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        LastNameText.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 NameTextActionPerformed(evt);
             }
         });
         getContentPane().add(LastNameText);
         LastNameText.setBounds(280, 130, 140, 28);
 
-        IdText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        IdText.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 IdTextActionPerformed(evt);
             }
         });
         getContentPane().add(IdText);
         IdText.setBounds(280, 160, 140, 28);
 
-        PhoneNoText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        PhoneNoText.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 PhoneNoTextActionPerformed(evt);
             }
         });
         getContentPane().add(PhoneNoText);
         PhoneNoText.setBounds(280, 190, 140, 28);
 
-        CityAddressText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        CityAddressText.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 AddressTextActionPerformed(evt);
             }
         });
         getContentPane().add(CityAddressText);
         CityAddressText.setBounds(280, 220, 140, 28);
 
-        StreetAddressText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        StreetAddressText.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 AddressTextActionPerformed(evt);
             }
         });
         getContentPane().add(StreetAddressText);
         StreetAddressText.setBounds(280, 250, 140, 28);
 
-        passwordText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        passwordText.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 passwordTextActionPerformed(evt);
             }
         });
@@ -153,9 +156,9 @@ public class StudentNew extends javax.swing.JFrame {
         passwordText.setBounds(280, 280, 140, 28);
 
         btnCancel.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCancel.setText("Back");
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
@@ -170,8 +173,8 @@ public class StudentNew extends javax.swing.JFrame {
 
         btnCreateAccount.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnCreateAccount.setText("CreateAccount");
-        btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCreateAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btnCreateAccountActionPerformed(evt);
             }
         });
@@ -199,7 +202,7 @@ public class StudentNew extends javax.swing.JFrame {
         pack();
     }
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnCancelActionPerformed(ActionEvent evt) {
         StudentLogin sl = new StudentLogin();
         sl.setVisible(true);
         sl.pack();
@@ -207,53 +210,70 @@ public class StudentNew extends javax.swing.JFrame {
 
     }
 
-    private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {
+    private void passwordTextActionPerformed(ActionEvent evt) {
        passWord = passwordText.getPassword();
     }
 
-    private void NameTextActionPerformed(java.awt.event.ActionEvent evt) {
-        FirstN = FirstNameText.getText();
-        LastN = LastNameText.getText();
+    private void NameTextActionPerformed(ActionEvent evt) {
+        
    
     }
 
-    private void IdTextActionPerformed(java.awt.event.ActionEvent evt) {
+    private void IdTextActionPerformed(ActionEvent evt) {
         Id = IdText.getText();
     }
 
-    private void PhoneNoTextActionPerformed(java.awt.event.ActionEvent evt) {
+    private void PhoneNoTextActionPerformed(ActionEvent evt) {
         PhoneNo = PhoneNoText.getText();
     }
 
-    private void AddressTextActionPerformed(java.awt.event.ActionEvent evt) {
+    private void AddressTextActionPerformed(ActionEvent evt) {
         city = CityAddressText.getText();
         street = StreetAddressText.getText();
     }
 
-    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {
-       /*  Name = Name.getText();
-        Id = Id.getText();
-        String[] loginDetails = new String[4];
-      String Name = "";
-      String Id = "";*/
+    private void btnCreateAccountActionPerformed(ActionEvent evt) {
+        FirstN = FirstNameText.getText();
+        LastN = LastNameText.getText();
+        Id = IdText.getText();
+        PhoneNo = PhoneNoText.getText();
+        city = CityAddressText.getText();
+        street = StreetAddressText.getText();
+        passWord = passwordText.getPassword();
 
-	try(PrintWriter bw = new PrintWriter(new BufferedWriter(new FileWriter("loginDetails.txt",true)))){
+        try(PrintWriter bw = new PrintWriter(new BufferedWriter(new FileWriter("loginDetails.txt",true)))){
 	
-		//boolean end = false;
-        //Student s = new Student(FirstN,LastN,Id,street,city,PhoneNo);
-        String p = new String(passWord);
-        bw.write(FirstNameText.getText()+","+LastNameText.getText()+","+IdText.getText()+","+StreetAddressText.getText()+","+CityAddressText.getText()+","+PhoneNoText.getText()+","+p+"\n");
-        JOptionPane.showMessageDialog(null, "New User created"); 
+            //boolean end = false;
+            //Student s = new Student(FirstN,LastN,Id,street,city,PhoneNo);
+            String p = new String(passWord);
+            bw.write(IdText.getText()+","+p+"\n");
+            JOptionPane.showMessageDialog(null, "New User created"); 
+            
+        }
+        catch(FileNotFoundException ex){
+             JOptionPane.showMessageDialog(null,"File Not Found");
+        }
+        catch(Exception ex){
+             JOptionPane.showMessageDialog(null,ex.getMessage());
+        }
+
+        try{  
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+             
+            PreparedStatement insert = con.prepareStatement("INSERT INTO student (Name,Address,ContactNo,ID) VALUES (?,?,?,?)");
+            insert.setString(1,FirstN+LastN);
+            insert.setString(2,city+","+street);
+            insert.setString(3,PhoneNo);
+            insert.setString(4,Id);
+            insert.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Account Created!");
+            con.close();  
+        }catch(Exception e){System.out.println(e);}
+
         
-	}
-	catch(FileNotFoundException ex){
-		 JOptionPane.showMessageDialog(null,"File Not Found");
-	}
-	catch(Exception ex){
-		 JOptionPane.showMessageDialog(null,ex.getMessage());
-	}
-  
-}         
+    }       
    
     public static void main(String args[]) {
         

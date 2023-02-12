@@ -1,6 +1,12 @@
 package GUI;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.sql.*;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 //import java.text.DateFormat;
 //import java.text.SimpleDateFormat;
 //import java.util.Calendar;
@@ -17,21 +23,7 @@ public class AdminForm extends javax.swing.JFrame {
    
      public static SystemManager manager ;
     
-   /*   public AdminForm() {
-         initComponents();
-         
-         construct();
-         
-          manager = new SystemManager("businfo.txt");
-     }
-     
-     public AdminForm(String file) {
-         initComponents();
-         
-         construct();
-         
-         manager = new SystemManager(file);
-     }*/
+   
      public AdminForm() {
         initComponents();
         
@@ -39,157 +31,205 @@ public class AdminForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    //  private void construct()
-    //  {
-    //      //DD::: setup the footer notification area with live date and time along with setting the window to maximized state
-         
-    //      this.setExtendedState( this.getExtendedState()|JFrame.MAXIMIZED_BOTH );
-         
-    //       //Start Timer
-    //      final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    //      int interval = 1000; // 1000 ms
-    //      new Timer(interval, new ActionListener() {
-    //          @Override
-    //          public void actionPerformed(ActionEvent e) {
-    //              Calendar now = Calendar.getInstance();
-    //              lblNow.setText(dateFormat.format(now.getTime()));
-    //          }
-    //      }).start();
-    //  }
-    
+  
     private void initComponents() {
 
         //lblNow = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         btnStudent = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnAnnouncements = new javax.swing.JButton();
-        btnFee = new javax.swing.JButton();
+        btnbus = new javax.swing.JButton();
+        btnbusedit = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(707, 569));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1900,990));
+        setResizable(true);
         getContentPane().setLayout(null);
 
-         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        try{ 
+            int rows=0;
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            Statement stmt=con.createStatement();  
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM announcement");
+            rs.next();
+            rows = rs.getInt(1);
+            String data[][] = new String[rows][];  
+
+            ResultSet rs1=stmt.executeQuery("SELECT * FROM announcement");
+            int j=0;
+            while(rs1.next()){
+                String entry[]= new String[3];
+                for(int i =0; i<3; i++){
+                    entry[i] = rs1.getString(i+1);
+                }
+                data[j]=entry;
+                j++;
+            }  
+            String column[]={"Date","Time","Announcement"};
+            JTable studentDetails = new JTable(data,column);
+            studentDetails.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            studentDetails.getColumnModel().getColumn(0).setPreferredWidth(90);
+            studentDetails.getColumnModel().getColumn(1).setPreferredWidth(90);
+            studentDetails.getColumnModel().getColumn(2).setPreferredWidth(620);
+            
+            JScrollPane sp=new JScrollPane(studentDetails);
+            sp.setBounds(1000,180,800,600);
+            getContentPane().add(sp);
+            setVisible(true);
+            con.close();  
+        }catch(Exception e){System.out.println(e);}  
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
         jLabel1.setText("Check Student Details ");
         jLabel1.setForeground(Color.white);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(290, 150, 200, 20);
+        jLabel1.setBounds(50, 330, 200, 20);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel2.setText("Update Fee details");
+        jLabel2.setText("Update Bus details");
         jLabel2.setForeground(Color.white);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(300, 240, 150, 20);
+        jLabel2.setBounds(50, 420, 150, 20);
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel3.setText("Check Announcements");
+        jLabel3.setText("Announcements");
         jLabel3.setForeground(Color.white);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(294, 330, 170, 19);
+        jLabel3.setBounds(50, 510, 170, 19);
+
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabel4.setText("Update student Bus No.");
+        jLabel4.setForeground(Color.white);
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(50, 600, 170, 19);
 
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
         btnBack.setForeground(Color.WHITE);
         btnBack.setUI(new StyledButtonUI());
-        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+        btnBack.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
                 btnBack.setBackground(new Color(92, 132, 147));
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(MouseEvent evt) {
                 btnBack.setBackground(new Color(112, 161, 180));
             }
         });
         btnBack.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
         getContentPane().add(btnBack);
-        btnBack.setBounds(10, 10, 90, 32);
+        btnBack.setBounds(50, 260, 100, 32);
 
         //Student Details Button
         btnStudent.setBackground(new Color(112, 161, 180));
         btnStudent.setForeground(Color.WHITE);
         btnStudent.setUI(new StyledButtonUI());
-        btnStudent.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+        btnStudent.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
                 btnStudent.setBackground(new Color(92, 132, 147));
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(MouseEvent evt) {
                 btnStudent.setBackground(new Color(112, 161, 180));
             }
         });
         btnStudent.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnStudent.setText("View details");
-        btnStudent.setBackground(new Color(112,148,156));
         btnStudent.setForeground(Color.white);
-        btnStudent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBookActionPerformed(evt);
+        btnStudent.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnStudentActionPerformed(evt);
             }
         });
         getContentPane().add(btnStudent);
-        btnStudent.setBounds(290, 170, 150, 32);
+        btnStudent.setBounds(50, 350, 100, 32);
 
-        //View Fee Button
-        btnFee.setBackground(new Color(112, 161, 180));
-        btnFee.setForeground(Color.WHITE);
-        btnFee.setUI(new StyledButtonUI());
-        btnFee.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnFee.setBackground(new Color(92, 132, 147));
+        //Update Bus Details Button
+        btnbus.setBackground(new Color(112, 161, 180));
+        btnbus.setForeground(Color.WHITE);
+        btnbus.setUI(new StyledButtonUI());
+        btnbus.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnbus.setBackground(new Color(92, 132, 147));
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnFee.setBackground(new Color(112, 161, 180));
+            public void mouseExited(MouseEvent evt) {
+                btnbus.setBackground(new Color(112, 161, 180));
             }
         });
-        btnFee.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnFee.setText("View Fee");
-        btnFee.setBackground(new Color(112,148,156));
-        btnFee.setForeground(Color.white);
+        btnbus.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnbus.setText("Bus Details");
+        btnbus.setForeground(Color.white);
 
         
-        btnFee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnbus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btnDetailsActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFee);
-        btnFee.setBounds(290, 260, 150, 32);
+        getContentPane().add(btnbus);
+        btnbus.setBounds(50, 440, 100, 32);
 
         //Announcement Button
         btnAnnouncements.setBackground(new Color(112, 161, 180));
         btnAnnouncements.setForeground(Color.WHITE);
         btnAnnouncements.setUI(new StyledButtonUI());
-        btnAnnouncements.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+        btnAnnouncements.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
                 btnAnnouncements.setBackground(new Color(92, 132, 147));
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(MouseEvent evt) {
                 btnAnnouncements.setBackground(new Color(112, 161, 180));
             }
         });
         btnAnnouncements.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnAnnouncements.setText("Click to see Announcements");
-        btnAnnouncements.setBackground(new Color(112,148,156));
+        btnAnnouncements.setText("Announce");
         btnAnnouncements.setForeground(Color.white);
-        btnAnnouncements.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAttendanceActionPerformed(evt);
+        btnAnnouncements.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnAnnouncementActionPerformed(evt);
             }
         });
         getContentPane().add(btnAnnouncements);
-        btnAnnouncements.setBounds(270, 350, 200, 32);
+        btnAnnouncements.setBounds(50, 530, 100, 32);
+
+        //Bus Edit Button
+        btnbusedit.setBackground(new Color(112, 161, 180));
+        btnbusedit.setForeground(Color.WHITE);
+        btnbusedit.setUI(new StyledButtonUI());
+        btnbusedit.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnbusedit.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnbusedit.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnbusedit.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnbusedit.setText("Edit Bus");
+        btnbusedit.setForeground(Color.white);
+        btnbusedit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnBusEditActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnbusedit);
+        btnbusedit.setBounds(50, 620, 100, 32);
+
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,65 +248,39 @@ public class AdminForm extends javax.swing.JFrame {
         pack();
     }
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBackActionPerformed(ActionEvent evt) {
         AdminLogin ss = new AdminLogin();
         ss.setVisible(true);
         ss.pack();
         this.dispose();
     }
-    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnStudentActionPerformed(ActionEvent evt) {
+        GetStudentList s = new GetStudentList();
+        s.setVisible(true);
+        s.pack();
+        this.dispose();
     }
-    private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnDetailsActionPerformed(ActionEvent evt) {
+        UpdateBus s = new UpdateBus();
+        s.setVisible(true);
+        s.pack();
+        this.dispose();
     }
-    private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {        
+    private void btnAnnouncementActionPerformed(ActionEvent evt) {
+        Announcement s = new Announcement();
+        s.setVisible(true);
+        s.pack();
+        this.dispose();
     }
 
-/* 	try(PrintWriter write = new PrintWriter(new FileOutputStream("newAccount.txt"))){
-	
-		boolean end = false;
-        //Student s = new Student(FirstN,LastN,Id,street,city,PhoneNo);
-        write.println(FirstNameText.getText()+","+LastNameText.getText()+","+IdText.getText()+","+StreetAddressText.getText()+","+CityAddressText.getText()+","+PhoneNoText.getText());
-	}
-	catch(FileNotFoundException ex){
-		 JOptionPane.showMessageDialog(null,"File Not Found");
-	}
-	catch(Exception ex){
-		 JOptionPane.showMessageDialog(null,ex.getMessage());
-	}
-         
-      
-    }*/
-
-/*try(Scanner read = new Scanner(new FileInputStream("loginDetails.txt"))){
-	
-    boolean end = false;
-    
-    while(read.hasNextLine()&& !end){
-
-        loginDetails = read.nextLine().split(",");
-        userName = loginDetails[0];
-        password = loginDetails[1];
-                    
-                    if(userName.compareTo(username)==0 && password.compareTo(passWord)==0){
-                        LoadFile1 lf = new LoadFile1();
-                        lf.setVisible(true);
-                        lf.pack();
-                        this.dispose();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Invalid login credentials. Please try again.");
-                    }
+    private void btnBusEditActionPerformed(ActionEvent evt) {
+        BusNo s = new BusNo();
+        s.setVisible(true);
+        s.pack();
+        this.dispose();
     }
-}
-catch(FileNotFoundException ex){
-     JOptionPane.showMessageDialog(null,"File Not Found");
-}
-catch(Exception ex){
-     JOptionPane.showMessageDialog(null,ex.getMessage());
-}
-    
-  
-  
-}*/           
+
+     
  
      public static void main(String args[]) {
         
@@ -300,11 +314,13 @@ catch(Exception ex){
     //private javax.swing.JLabel lblNow;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnFee;
+    private javax.swing.JButton btnbus;
+    private javax.swing.JButton btnbusedit;
     private javax.swing.JButton btnAnnouncements;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     // End of variables declaration//GEN-END:variables
