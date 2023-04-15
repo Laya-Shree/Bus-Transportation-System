@@ -17,6 +17,7 @@ public class FirstPage extends javax.swing.JFrame {
     
     private void initComponents() {
 
+        btnProf = new javax.swing.JButton();
         btnStudent = new javax.swing.JButton();
         btnDriver = new javax.swing.JButton();
         btnAdmin = new javax.swing.JButton();
@@ -36,6 +37,28 @@ public class FirstPage extends javax.swing.JFrame {
         jLabel1.setText("Ride With Us");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(200, 20, 300, 50);
+
+//Professor Button
+    btnProf.setBackground(new Color(37, 150, 190));
+    btnProf.setForeground(Color.WHITE);
+    btnProf.setUI(new StyledButtonUI());
+    btnProf.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnProf.setBackground(new Color(27, 119, 152));
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnProf.setBackground(new Color(37, 150, 190));
+        }
+    });
+    btnProf.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+    btnProf.setText("Professor");
+    btnProf.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnProfActionPerformed(evt);
+        }
+    });
+    getContentPane().add(btnProf);
+    btnProf.setBounds(100, 100, 90, 32);
 
 
         //Student Button
@@ -58,7 +81,7 @@ public class FirstPage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnStudent);
-        btnStudent.setBounds(150, 100, 90, 32);
+        btnStudent.setBounds(250, 100, 90, 32);
 
         //Driver Button
         btnDriver.setBackground(new Color(37, 150, 190));
@@ -80,7 +103,7 @@ public class FirstPage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDriver);
-        btnDriver.setBounds(300, 100, 90, 32);
+        btnDriver.setBounds(400, 100, 90, 32);
 
         //Admin Button
         btnAdmin.setBackground(new Color(37, 150, 190));
@@ -102,7 +125,7 @@ public class FirstPage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAdmin);
-        btnAdmin.setBounds(450, 100, 90, 32);
+        btnAdmin.setBounds(520, 100, 90, 32);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/bus.gif"))); 
         getContentPane().add(jLabel2);
@@ -111,6 +134,14 @@ public class FirstPage extends javax.swing.JFrame {
 
         pack();
     }
+
+    private void btnProfActionPerformed(java.awt.event.ActionEvent evt) {
+        ProfessorLogin pLogin = new ProfessorLogin();
+        pLogin.pack();
+        pLogin.setVisible(true);
+        this.dispose();
+                     
+	}
 
     private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {
         StudentLogin sLogin = new StudentLogin();
@@ -166,6 +197,8 @@ public class FirstPage extends javax.swing.JFrame {
     }
 
     // Variables declaration 
+    
+    private javax.swing.JButton btnProf;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton btnDriver;
     private javax.swing.JButton btnAdmin;
