@@ -42,8 +42,8 @@ public class AdminForm extends javax.swing.JFrame {
         btnStudent = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnAnnouncements = new javax.swing.JButton();
-        btnbus = new javax.swing.JButton();
-        btnbusedit = new javax.swing.JButton();
+        btnUpdatebus = new javax.swing.JButton();
+        btnUpdateDriver = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
 
@@ -105,13 +105,13 @@ public class AdminForm extends javax.swing.JFrame {
         jLabel3.setText("Announcements");
         jLabel3.setForeground(Color.white);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(50, 510, 170, 19);
+        jLabel3.setBounds(50, 600, 170, 19);
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel4.setText("Update student Bus No.");
+        jLabel4.setText("Update Driver details");
         jLabel4.setForeground(Color.white);
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(50, 600, 170, 19);
+        jLabel4.setBounds(50, 510, 170, 19);
 
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
@@ -159,29 +159,29 @@ public class AdminForm extends javax.swing.JFrame {
         btnStudent.setBounds(50, 350, 100, 32);
 
         //Update Bus Details Button
-        btnbus.setBackground(new Color(112, 161, 180));
-        btnbus.setForeground(Color.WHITE);
-        btnbus.setUI(new StyledButtonUI());
-        btnbus.addMouseListener(new MouseAdapter() {
+        btnUpdatebus.setBackground(new Color(112, 161, 180));
+        btnUpdatebus.setForeground(Color.WHITE);
+        btnUpdatebus.setUI(new StyledButtonUI());
+        btnUpdatebus.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
-                btnbus.setBackground(new Color(92, 132, 147));
+                btnUpdatebus.setBackground(new Color(92, 132, 147));
             }
             public void mouseExited(MouseEvent evt) {
-                btnbus.setBackground(new Color(112, 161, 180));
+                btnUpdatebus.setBackground(new Color(112, 161, 180));
             }
         });
-        btnbus.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnbus.setText("Bus Details");
-        btnbus.setForeground(Color.white);
+        btnUpdatebus.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnUpdatebus.setText("Bus Details");
+        btnUpdatebus.setForeground(Color.white);
 
         
-        btnbus.addActionListener(new ActionListener() {
+        btnUpdatebus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnDetailsActionPerformed(evt);
             }
         });
-        getContentPane().add(btnbus);
-        btnbus.setBounds(50, 440, 100, 32);
+        getContentPane().add(btnUpdatebus);
+        btnUpdatebus.setBounds(50, 440, 100, 32);
 
         //Announcement Button
         btnAnnouncements.setBackground(new Color(112, 161, 180));
@@ -204,30 +204,30 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAnnouncements);
-        btnAnnouncements.setBounds(50, 530, 100, 32);
+        btnAnnouncements.setBounds(50, 620, 100, 32);
 
         //Bus Edit Button
-        btnbusedit.setBackground(new Color(112, 161, 180));
-        btnbusedit.setForeground(Color.WHITE);
-        btnbusedit.setUI(new StyledButtonUI());
-        btnbusedit.addMouseListener(new MouseAdapter() {
+        btnUpdateDriver.setBackground(new Color(112, 161, 180));
+        btnUpdateDriver.setForeground(Color.WHITE);
+        btnUpdateDriver.setUI(new StyledButtonUI());
+        btnUpdateDriver.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
-                btnbusedit.setBackground(new Color(92, 132, 147));
+                btnUpdateDriver.setBackground(new Color(92, 132, 147));
             }
             public void mouseExited(MouseEvent evt) {
-                btnbusedit.setBackground(new Color(112, 161, 180));
+                btnUpdateDriver.setBackground(new Color(112, 161, 180));
             }
         });
-        btnbusedit.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnbusedit.setText("Edit Bus");
-        btnbusedit.setForeground(Color.white);
-        btnbusedit.addActionListener(new ActionListener() {
+        btnUpdateDriver.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnUpdateDriver.setText("Driver Details");
+        btnUpdateDriver.setForeground(Color.white);
+        btnUpdateDriver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnBusEditActionPerformed(evt);
             }
         });
-        getContentPane().add(btnbusedit);
-        btnbusedit.setBounds(50, 620, 100, 32);
+        getContentPane().add(btnUpdateDriver);
+        btnUpdateDriver.setBounds(50, 530, 100, 32);
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,7 +274,7 @@ public class AdminForm extends javax.swing.JFrame {
     }
 
     private void btnBusEditActionPerformed(ActionEvent evt) {
-        BusNo s = new BusNo();
+        UpdateDriver s = new UpdateDriver();
         s.setVisible(true);
         s.pack();
         this.dispose();
@@ -314,8 +314,8 @@ public class AdminForm extends javax.swing.JFrame {
     //private javax.swing.JLabel lblNow;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnbus;
-    private javax.swing.JButton btnbusedit;
+    private javax.swing.JButton btnUpdatebus;
+    private javax.swing.JButton btnUpdateDriver;
     private javax.swing.JButton btnAnnouncements;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
