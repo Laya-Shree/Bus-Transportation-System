@@ -58,14 +58,14 @@ public class AdminForm extends javax.swing.JFrame {
             int rows=0;
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM announcement");
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM announcements");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT * FROM announcement");
+            ResultSet rs1=stmt.executeQuery("SELECT Date,Time,Info FROM announcements");
             int j=0;
             while(rs1.next()){
                 String entry[]= new String[3];

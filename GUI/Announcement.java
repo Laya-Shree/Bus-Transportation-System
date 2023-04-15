@@ -140,9 +140,9 @@ public class Announcement extends javax.swing.JFrame {
         try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            stmt.executeUpdate("INSERT INTO announcement (Date,Time,Announcement) VALUES (curDate(),curTime(),'"+a+"')");
+            stmt.executeUpdate("INSERT INTO announcements (Date,Time,User_ID,Info) VALUES (curDate(),curTime(),'admin','"+a+"')");
             JOptionPane.showMessageDialog(null,"Announcement has been made!");
    
             con.close();  
