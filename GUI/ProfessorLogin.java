@@ -183,6 +183,7 @@ public class ProfessorLogin extends javax.swing.JFrame {
 			loginDetails = read.nextLine().split(",");
             userNamef=loginDetails[0];
 			passwordf = loginDetails[1];
+            
 
                         
                         if(userNamef.compareTo(usernamei)==0 && passwordf.compareTo(pi)==0){

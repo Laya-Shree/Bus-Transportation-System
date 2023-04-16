@@ -1,7 +1,6 @@
 package GUI;
 import java.io.*;
 import java.sql.*;
-
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.event.*;
@@ -15,9 +14,10 @@ public class ProfessorNew extends javax.swing.JFrame {
     String FirstN ="";
     String LastN = "";
     String Id = "";
-    String PhoneNo = "";
+    int PhoneNo = 0;
     String street = "";
     String city = "";
+    String Bldg = "";
     char[] passWord;
     
     public ProfessorNew() {
@@ -37,12 +37,14 @@ public class ProfessorNew extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         FirstNameText = new javax.swing.JTextField();
         LastNameText = new javax.swing.JTextField();
         passwordText = new javax.swing.JPasswordField();
         PhoneNoText = new javax.swing.JTextField();
         CityAddressText = new javax.swing.JTextField();
         StreetAddressText = new javax.swing.JTextField();
+        BldgAddressText = new javax.swing.JTextField();
         IdText = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
         btnCreateAccount = new javax.swing.JButton();
@@ -93,11 +95,17 @@ public class ProfessorNew extends javax.swing.JFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(170, 250, 100, 19);
 
-        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 15)); 
+        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 15)); 
+        jLabel8.setText("Bldg:");
+        jLabel8.setForeground(Color.white);
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(170, 280, 100, 19);
+
+        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 16)); 
         jLabel7.setText("Password:");
         jLabel7.setForeground(Color.white);
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(170, 280, 100, 19);
+        jLabel7.setBounds(170, 310, 100, 19);
 
         FirstNameText.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -147,13 +155,21 @@ public class ProfessorNew extends javax.swing.JFrame {
         getContentPane().add(StreetAddressText);
         StreetAddressText.setBounds(280, 250, 140, 28);
 
+        BldgAddressText.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                AddressTextActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BldgAddressText);
+        BldgAddressText.setBounds(280, 280, 140, 28);
+
         passwordText.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 passwordTextActionPerformed(evt);
             }
         });
         getContentPane().add(passwordText);
-        passwordText.setBounds(280, 280, 140, 28);
+        passwordText.setBounds(280, 310, 140, 28);
 
         btnCancel.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnCancel.setText("Back");
@@ -224,21 +240,23 @@ public class ProfessorNew extends javax.swing.JFrame {
     }
 
     private void PhoneNoTextActionPerformed(ActionEvent evt) {
-        PhoneNo = PhoneNoText.getText();
+        PhoneNo = Integer.parseInt(PhoneNoText.getText());
     }
 
     private void AddressTextActionPerformed(ActionEvent evt) {
         city = CityAddressText.getText();
         street = StreetAddressText.getText();
+        Bldg = BldgAddressText.getText();
     }
 
     private void btnCreateAccountActionPerformed(ActionEvent evt) {
         FirstN = FirstNameText.getText();
         LastN = LastNameText.getText();
         Id = IdText.getText();
-        PhoneNo = PhoneNoText.getText();
+        PhoneNo = Integer.parseInt(PhoneNoText.getText());
         city = CityAddressText.getText();
         street = StreetAddressText.getText();
+        Bldg = BldgAddressText.getText();
         passWord = passwordText.getPassword();
 
         try(PrintWriter bw = new PrintWriter(new BufferedWriter(new FileWriter("PloginDetails.txt",true)))){
@@ -260,13 +278,15 @@ public class ProfessorNew extends javax.swing.JFrame {
         try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
              
-            PreparedStatement insert = con.prepareStatement("INSERT INTO Professor (Name,Address,ContactNo,ID) VALUES (?,?,?,?)");
-            insert.setString(1,FirstN+LastN);
-            insert.setString(2,city+","+street);
-            insert.setString(3,PhoneNo);
-            insert.setString(4,Id);
+            PreparedStatement insert = con.prepareStatement("INSERT INTO Passenger (ID,Name,Contact_No,City,Street,Bldg) VALUES (?,?,?,?,?,?)");
+            insert.setString(1,Id);
+            insert.setString(2,FirstN+" "+LastN);
+            insert.setInt(3,PhoneNo);
+            insert.setString(4,city);
+            insert.setString(5,street);
+            insert.setString(6,Bldg);
             insert.executeUpdate();
             JOptionPane.showMessageDialog(null,"Account Created!");
             con.close();  
@@ -312,12 +332,14 @@ public class ProfessorNew extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPasswordField passwordText;
     private javax.swing.JTextField FirstNameText;
     private javax.swing.JTextField LastNameText;
     private javax.swing.JTextField PhoneNoText;
     private javax.swing.JTextField CityAddressText;
     private javax.swing.JTextField StreetAddressText;
+    private javax.swing.JTextField BldgAddressText;
     private javax.swing.JTextField IdText;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
