@@ -21,14 +21,17 @@ class getAbsent extends StudentLogin{
     public String getName(){
         return s.getName();
     }
-    public String getAddress(){
-        return s.getAddress();
+    public String getCity(){
+        return s.getCity();
     }
-    public String getContactNo(){
+    public String getStreet(){
+        return s.getStreet();
+    }
+    public String getBldg(){
+        return s.getBldg();
+    }
+    public int getContactNo(){
         return s.getContactNo();
-    }
-    public int getBusNo(){
-        return s.getBusNo();
     }
 }
 
@@ -126,28 +129,28 @@ public class Absent extends javax.swing.JFrame {
             int rows=0;
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*"); 
-            PreparedStatement countrow = con.prepareStatement("SELECT COUNT(*) FROM absent WHERE StudentID =?");
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*"); 
+            PreparedStatement countrow = con.prepareStatement("SELECT COUNT(*) FROM Absent WHERE ID =?");
             countrow.setString(1,s.getId());
             ResultSet rs1=countrow.executeQuery();
             rs1.next();
             rows = rs1.getInt(1);
             String data[][] = new String[rows][];  
 
-            PreparedStatement details = con.prepareStatement("SELECT Date, StudentName, BusNo FROM absent WHERE StudentID = ? ORDER BY Date DESC");
+            PreparedStatement details = con.prepareStatement("SELECT * FROM Absent WHERE ID = ? ORDER BY Date DESC");
             details.setString(1,s.getId());
             ResultSet rs2=details.executeQuery();
             
             int j=0;
             while(rs2.next()){
-                String entry[]= new String[3];
-                for(int i =0; i<3; i++){
+                String entry[]= new String[6];
+                for(int i =0; i<6; i++){
                     entry[i] = rs2.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Date","Student Name","Bus Number"};
+            String column[]={"ID","Name","Date","City","Street","Bldg"};
             absentdetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(absentdetails);
             sp.setBounds(800,180,1000,600);
@@ -200,15 +203,15 @@ public class Absent extends javax.swing.JFrame {
         try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
              
-            PreparedStatement insert = con.prepareStatement("INSERT INTO absent VALUES(?,?,?,?,?,?)");
-            insert.setString(1,d);
-            insert.setString(2,s.getId());
-            insert.setString(3,s.getName());
-            insert.setInt(4,s.getBusNo());
-            insert.setString(5,s.getAddress());
-            insert.setString(6,s.getContactNo());
+            PreparedStatement insert = con.prepareStatement("INSERT INTO Absent VALUES(?,?,?,?,?,?)");
+            insert.setString(1,s.getId());
+            insert.setString(2,s.getName());
+            insert.setString(3,d);
+            insert.setString(4,s.getCity());
+            insert.setString(5,s.getStreet());
+            insert.setString(6,s.getBldg());
             insert.executeUpdate();
             JOptionPane.showMessageDialog(null,"Notified The Driver!");
             con.close();  
