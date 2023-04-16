@@ -47,14 +47,14 @@ public class UpdateBus extends javax.swing.JFrame {
         JButton btnAdd = new JButton();
         JButton btnEdit = new JButton();
         JButton btnDelete = new JButton();
-        textField1 = new javax.swing.JTextField();
-        textField2 = new javax.swing.JTextField();
-        textField3 = new javax.swing.JTextField();
-        textField4 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        JLabel jLabel2 = new JLabel();
-        JLabel jLabel3 = new JLabel();
-        JLabel jLabel4 = new JLabel();
+        textfbusno = new javax.swing.JTextField();
+        textfid = new javax.swing.JTextField();
+        textfcapacity = new javax.swing.JTextField();
+        textfplateno = new javax.swing.JTextField();
+        jLabelbusno = new javax.swing.JLabel();
+        JLabel jLabelid = new JLabel();
+        JLabel jLabelcapacity = new JLabel();
+        JLabel jLabelplateno = new JLabel();
         //btnAttendance = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
@@ -71,44 +71,43 @@ public class UpdateBus extends javax.swing.JFrame {
 
        
 
-        textField1.addActionListener(new ActionListener() {
+        textfbusno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //textField1ActionPerformed(evt);
             }
         });
+        getContentPane().add(textfbusno);
+        textfbusno.setBounds(450, 290, 180, 30);
 
-        getContentPane().add(textField1);
-        textField1.setBounds(450, 290, 180, 30);
-
-        textField2.addActionListener(new ActionListener() {
+        textfid.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //textField2ActionPerformed(evt);
             }
         });
-        getContentPane().add(textField2);
-        textField2.setBounds(450, 380, 180, 30);
+        getContentPane().add(textfid);
+        textfid.setBounds(450, 380, 180, 30);
 
-        textField3.addActionListener(new ActionListener() {
+        textfcapacity.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //textField3ActionPerformed(evt);
             }
         });
-        getContentPane().add(textField3);
-        textField3.setBounds(450, 470, 180, 30);
+        getContentPane().add(textfcapacity);
+        textfcapacity.setBounds(450, 470, 180, 30);
 
-        textField4.addActionListener(new ActionListener() {
+        textfplateno.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                //textField4ActionPerformed(evt);
+                //textField3ActionPerformed(evt);
             }
         });
-        getContentPane().add(textField4);
-        textField4.setBounds(450, 560, 180, 30);
+        getContentPane().add(textfplateno);
+        textfplateno.setBounds(450, 560, 180, 30);
 
         try{ 
             int rows=0;
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
             ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM bus");
             rs.next();
@@ -127,16 +126,16 @@ public class UpdateBus extends javax.swing.JFrame {
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Bus No.","Driver Name","Contact No.","Area Covered"};
+            String column[]={"Bus No.","Driver ID","Capacity","Plate Number"};
             busdetails = new JTable(data,column);
             busdetails.addMouseListener(new MouseAdapter(){
                 public void mouseClicked (MouseEvent evt){
                         JTable target = (JTable)evt.getSource();
                         int selectedrow = target.getSelectedRow();
-                        textField1.setText(busdetails.getModel().getValueAt(selectedrow,0).toString());
-                        textField2.setText(busdetails.getModel().getValueAt(selectedrow,1).toString());
-                        textField3.setText(busdetails.getModel().getValueAt(selectedrow,2).toString());
-                        textField4.setText(busdetails.getModel().getValueAt(selectedrow,3).toString());
+                        textfbusno.setText(busdetails.getModel().getValueAt(selectedrow,0).toString());
+                        textfid.setText(busdetails.getModel().getValueAt(selectedrow,1).toString());
+                        textfcapacity.setText(busdetails.getModel().getValueAt(selectedrow,2).toString());
+                        textfplateno.setText(busdetails.getModel().getValueAt(selectedrow,3).toString());
                 }
             });
             
@@ -149,29 +148,29 @@ public class UpdateBus extends javax.swing.JFrame {
         }catch(Exception e){System.out.println(e);} 
         
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel1.setText("Bus Number:");
-        jLabel1.setForeground(Color.white);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(200, 290, 250, 20);
+        jLabelbusno.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelbusno.setText("Bus Number:");
+        jLabelbusno.setForeground(Color.white);
+        getContentPane().add(jLabelbusno);
+        jLabelbusno.setBounds(200, 290, 250, 20);
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel2.setText("Driver Name:");
-        jLabel2.setForeground(Color.white);
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(200, 380, 250, 20);
+        jLabelid.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelid.setText("Driver ID:");
+        jLabelid.setForeground(Color.white);
+        getContentPane().add(jLabelid);
+        jLabelid.setBounds(200, 380, 250, 20);
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel3.setText("Driver Contact Number:");
-        jLabel3.setForeground(Color.white);
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(200, 470, 250, 20);
+        jLabelcapacity.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelcapacity.setText("Capacity:");
+        jLabelcapacity.setForeground(Color.white);
+        getContentPane().add(jLabelcapacity);
+        jLabelcapacity.setBounds(200, 470, 250, 20);
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel4.setText("Area Covered:");
-        jLabel4.setForeground(Color.white);
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(200, 560, 250, 20);
+        jLabelplateno.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelplateno.setText("Plateno:");
+        jLabelplateno.setForeground(Color.white);
+        getContentPane().add(jLabelplateno);
+        jLabelplateno.setBounds(200, 560, 250, 20);
 
 
         //Back Button
@@ -196,7 +195,7 @@ public class UpdateBus extends javax.swing.JFrame {
         getContentPane().add(btnBack);
         btnBack.setBounds(10, 10, 90, 32);
 
-        //Attendence Button
+        //Add Button
         btnAdd.setBackground(new Color(112, 161, 180));
         btnAdd.setForeground(Color.WHITE);
         btnAdd.setUI(new StyledButtonUI());
@@ -219,6 +218,7 @@ public class UpdateBus extends javax.swing.JFrame {
         getContentPane().add(btnAdd);
         btnAdd.setBounds(200, 650, 70, 32);
 
+        //Edit button
         btnEdit.setBackground(new Color(112, 161, 180));
         btnEdit.setForeground(Color.WHITE);
         btnEdit.setUI(new StyledButtonUI());
@@ -241,6 +241,7 @@ public class UpdateBus extends javax.swing.JFrame {
         getContentPane().add(btnEdit);
         btnEdit.setBounds(380, 650, 70, 32);
 
+        //Delete Button
         btnDelete.setBackground(new Color(112, 161, 180));
         btnDelete.setForeground(Color.WHITE);
         btnDelete.setUI(new StyledButtonUI());
@@ -266,19 +267,19 @@ public class UpdateBus extends javax.swing.JFrame {
        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(panelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(dp)
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(dp)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(panelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(dp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }
@@ -291,20 +292,20 @@ public class UpdateBus extends javax.swing.JFrame {
         
     }
     private void btnAddActionPerformed(ActionEvent evt) {
-        int busno = Integer.parseInt(textField1.getText());
-        String driver = textField2.getText();
-        String contactno = textField3.getText();
-        String Area = textField4.getText();
+        int busno = Integer.parseInt(textfbusno.getText());
+        String id = textfid.getText();
+        int capacity = Integer.parseInt(textfcapacity.getText());
+        String plateno = textfplateno.getText();
         try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
              
             PreparedStatement insert = con.prepareStatement("INSERT INTO bus VALUES (?,?,?,?)");
             insert.setInt(1,busno);
-            insert.setString(2,driver);
-            insert.setString(3,contactno);
-            insert.setString(4,Area);
+            insert.setString(2,id);
+            insert.setInt(3,capacity);
+            insert.setString(4,plateno);
             insert.executeUpdate();
             JOptionPane.showMessageDialog(null,"Record Added!");
             con.close();  
@@ -316,20 +317,20 @@ public class UpdateBus extends javax.swing.JFrame {
     }
 
     private void btnEditActionPerformed(ActionEvent evt) {
-        int busno = Integer.parseInt(textField1.getText());
-        String driver = textField2.getText();
-        String contactno = textField3.getText();
-        String Area = textField4.getText();
+        int busno = Integer.parseInt(textfbusno.getText());
+        String id = textfid.getText();
+        int capacity = Integer.parseInt(textfcapacity.getText());
+        String plateno = textfplateno.getText();
         try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
              
-            PreparedStatement insert = con.prepareStatement("UPDATE bus set Bus_No=?,Driver_Contact=?,Area_Covered=? WHERE Driver_Name=?");
-            insert.setInt(1,busno);
-            insert.setString(4,driver);
-            insert.setString(2,contactno);
-            insert.setString(3,Area);
+            PreparedStatement insert = con.prepareStatement("UPDATE bus set id=?, capacity=?, plate_no=? WHERE BusNo=?");
+            insert.setInt(4,busno);
+            insert.setString(1,id);
+            insert.setInt(2,capacity);
+            insert.setString(3,plateno);
             insert.executeUpdate();
             JOptionPane.showMessageDialog(null,"Record Updated!");
             con.close();  
@@ -341,14 +342,14 @@ public class UpdateBus extends javax.swing.JFrame {
     }
 
     private void btnDeleteActionPerformed(ActionEvent evt) {
-        int busno = Integer.parseInt(textField1.getText());
+        int busno = Integer.parseInt(textfbusno.getText());
    
         try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
              
-            PreparedStatement delete = con.prepareStatement("DELETE FROM bus WHERE Bus_No=?");
+            PreparedStatement delete = con.prepareStatement("DELETE FROM bus WHERE BusNo=?");
             delete.setInt(1,busno);
             delete.executeUpdate();
             JOptionPane.showMessageDialog(null,"Record Deleted!");
@@ -397,11 +398,11 @@ public class UpdateBus extends javax.swing.JFrame {
     //private javax.swing.JButton btnAttendance;
     private javax.swing.JButton btnBack;
     private javax.swing.JTable busdetails;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField textField1;
-    private javax.swing.JTextField textField2;
-    private javax.swing.JTextField textField3;
-    private javax.swing.JTextField textField4;
+    private javax.swing.JLabel jLabelbusno;
+    private javax.swing.JTextField textfbusno;
+    private javax.swing.JTextField textfid;
+    private javax.swing.JTextField textfcapacity;
+    private javax.swing.JTextField textfplateno;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     // End of variables declaration//GEN-END:variables
