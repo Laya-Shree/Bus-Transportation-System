@@ -241,7 +241,7 @@ public class ProfessorForm extends javax.swing.JFrame {
         this.dispose();   
     }
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {
-        Absent sl = new Absent();
+        AbsentP sl = new AbsentP();
         sl.setVisible(true);
         sl.pack();
         this.dispose();

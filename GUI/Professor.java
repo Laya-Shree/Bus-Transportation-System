@@ -16,15 +16,15 @@ public class Professor {
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*"); 
-            PreparedStatement countrow = con.prepareStatement("SELECT Name,Contact_No, City, Street, Bldg FROM Passenger WHERE ID like '%P'");
+            PreparedStatement countrow = con.prepareStatement("SELECT Name,Contact_No,City,Street,Bldg FROM Passenger WHERE ID like '%P'");
             //countrow.setString(1,UserName);
             ResultSet rs=countrow.executeQuery();
             rs.next();
-            Name = rs.getString(2);
-            Contact_No = rs.getInt(3);
-            City= rs.getString(4);
-            Street = rs.getString(5);
-            Bldg = rs.getString(6);
+            Name = rs.getString(1);
+            Contact_No = rs.getInt(2);
+            City= rs.getString(3);
+            Street = rs.getString(4);
+            Bldg = rs.getString(5);
             con.close();  
         }catch(Exception e){System.out.println(e);} 
 
