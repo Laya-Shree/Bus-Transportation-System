@@ -3,29 +3,9 @@ package GUI;
 import java.sql.*;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-//import java.awt.Graphics;
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
-// import java.awt.image.BufferedImage;
 import java.awt.Color;
-// import java.net.URL;
-// import java.text.DateFormat;
-// import java.text.SimpleDateFormat;
-// import java.util.Calendar;
-// import javax.imageio.ImageIO;
-// import javax.swing.JFrame;
-// import javax.swing.JInternalFrame;
-// import javax.swing.JOptionPane;
-// import javax.swing.Timer;
-// import java.io.*;
-// import javax.swing.JOptionPane;
-
 import Classes.*;
-/**
- *
- * @author Senarathna
- */
+
 public class ProfessorForm extends javax.swing.JFrame {
         
     /**
@@ -49,10 +29,12 @@ public class ProfessorForm extends javax.swing.JFrame {
         //jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         // btnBook = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
         btnAttendance = new javax.swing.JButton();
+        btnReserve = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
 
@@ -70,12 +52,12 @@ public class ProfessorForm extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM announcements");
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Announcements");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT Date,Time,Info FROM announcements");
+            ResultSet rs1=stmt.executeQuery("SELECT Date,Time,Info FROM Announcements");
             int j=0;
             while(rs1.next()){
                 String entry[]= new String[3];
@@ -99,11 +81,6 @@ public class ProfessorForm extends javax.swing.JFrame {
             con.close();  
         }catch(Exception e){System.out.println(e+"Here");}  
 
-        // jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        // jLabel1.setText("Book Your Seats Here ");
-        // getContentPane().add(jLabel1);
-        // jLabel1.setBounds(50, 240, 180, 20);
-        // jLabel1.setForeground(Color.white);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); 
         jLabel2.setText("Check Bus Details Here");
@@ -116,6 +93,13 @@ public class ProfessorForm extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(50, 420, 150, 19);
         jLabel3.setForeground(Color.white);
+
+        //Reserve Button
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabel4.setText("Reserve your Seat");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(50, 510, 120, 18);
+        jLabel4.setForeground(Color.white);
 
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
@@ -139,29 +123,6 @@ public class ProfessorForm extends javax.swing.JFrame {
         getContentPane().add(btnBack);
         btnBack.setBounds(10, 10, 100, 32);
 
-        // //Booking Button
-        // btnBook.setBackground(new Color(112, 161, 180));
-        // btnBook.setForeground(Color.WHITE);
-        // btnBook.setUI(new StyledButtonUI());
-        // btnBook.addMouseListener(new java.awt.event.MouseAdapter() {
-        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
-        //         btnBook.setBackground(new Color(92, 132, 147));
-        //     }
-        //     public void mouseExited(java.awt.event.MouseEvent evt) {
-        //         btnBook.setBackground(new Color(112, 161, 180));
-        //     }
-        // });
-        // btnBook.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        // btnBook.setText("Book Seat");
-        // btnBook.addActionListener(new java.awt.event.ActionListener() {
-        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
-        //         btnBookActionPerformed(evt);
-        //     }
-        // });
-        // getContentPane().add(btnBook);
-        // btnBook.setBounds(50, 260, 100, 32);
-        //btnBook.setBackground(new Color(112,148,156));
-        //btnBook.setForeground(Color.white);
         
         //Bus Details Button
         btnDetails.setBackground(new Color(112, 161, 180));
@@ -208,7 +169,28 @@ public class ProfessorForm extends javax.swing.JFrame {
         getContentPane().add(btnAttendance);
         btnAttendance.setBounds(50, 440, 100, 32);
 
-        
+        //Reserve Button
+        btnReserve.setBackground(new Color(112, 161, 180));
+        btnReserve.setForeground(Color.WHITE);
+        btnReserve.setUI(new StyledButtonUI());
+        btnReserve.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReserve.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReserve.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnReserve.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnReserve.setText("Reservation");
+        btnReserve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReserveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReserve);
+        btnReserve.setBounds(50, 530, 100, 32);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -248,18 +230,24 @@ public class ProfessorForm extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_btnCancelActionPerformed
+    private void btnReserveActionPerformed(java.awt.event.ActionEvent evt) {
+        Reserve s2 = new Reserve();
+        s2.setVisible(true);
+        s2.pack();
+        this.dispose();
 
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    //private javax.swing.JLabel lblNow;
-    // private javax.swing.JButton btnBook;
+
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnAttendance;
-    //private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnReserve;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     // End of variables declaration//GEN-END:variables
