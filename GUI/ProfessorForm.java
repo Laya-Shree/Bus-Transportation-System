@@ -25,12 +25,9 @@ public class ProfessorForm extends javax.swing.JFrame {
 
     private void initComponents() {
 
-        //lblNow = new javax.swing.JLabel();
-        //jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        // btnBook = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
         btnAttendance = new javax.swing.JButton();

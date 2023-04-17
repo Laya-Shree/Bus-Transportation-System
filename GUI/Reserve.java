@@ -69,7 +69,6 @@ public class Reserve extends javax.swing.JFrame {
         getContentPane().add(textField2);
         textField2.setBounds(450, 380, 180, 30);
 
-        
         try{ 
             int rows=0;
             Class.forName("com.mysql.cj.jdbc.Driver");  
@@ -81,19 +80,20 @@ public class Reserve extends javax.swing.JFrame {
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT Date,BusNo,Semesters FROM Reserved");
-            // DefaultTableModel table = (DefaultTableModel) busdetails.getModel();
-            
+            PreparedStatement select = con.prepareStatement("SELECT * FROM Reserved");
+            //select.setString(1,p1.getId());
+            ResultSet rs1=select.executeQuery();
+
             int j=0;
             while(rs1.next()){
-                String entry[]= new String[3];
-                for(int i =0; i<3; i++){
+                String entry[]= new String[4];
+                for(int i =0; i<4; i++){
                     entry[i] = rs1.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Date","BusNo","Semesters"};
+            String column[]={"ID","Date","BusNo","Semesters"};
             JTable reserveDetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(reserveDetails);
             sp.setBounds(1000,180,800,600);
