@@ -265,7 +265,7 @@ public class ProfessorForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCancelActionPerformed
     private void btnReserveActionPerformed(java.awt.event.ActionEvent evt) {
-        Reserve s2 = new Reserve();
+        PReserve s2 = new PReserve();
         s2.setVisible(true);
         s2.pack();
         this.dispose();
