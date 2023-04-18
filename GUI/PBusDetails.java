@@ -11,11 +11,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
-public class checkBusDetails extends javax.swing.JFrame {
+public class PBusDetails extends javax.swing.JFrame {
         
 
      JFrame f;
-     public checkBusDetails() {
+     public PBusDetails() {
         initComponents();
         
         this.pack();
@@ -132,19 +132,19 @@ public class checkBusDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(checkBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(checkBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(checkBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(checkBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
             
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new checkBusDetails().setVisible(true);
+                new PBusDetails().setVisible(true);
             }
         });
         

@@ -25,11 +25,13 @@ public class ProfessorForm extends javax.swing.JFrame {
 
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        btnDetails = new javax.swing.JButton();
+        btnBus = new javax.swing.JButton();
+        btnRoute = new javax.swing.JButton();
         btnAttendance = new javax.swing.JButton();
         btnReserve = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
@@ -78,9 +80,14 @@ public class ProfessorForm extends javax.swing.JFrame {
             con.close();  
         }catch(Exception e){System.out.println(e+"Here");}  
 
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabel1.setText("View Bus Routes");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(50,240, 180, 20);
+        jLabel1.setForeground(Color.white);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel2.setText("Check Bus Details Here");
+        jLabel2.setText("Check Bus Details");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(50,330, 180, 20);
         jLabel2.setForeground(Color.white);
@@ -120,28 +127,51 @@ public class ProfessorForm extends javax.swing.JFrame {
         getContentPane().add(btnBack);
         btnBack.setBounds(10, 10, 100, 32);
 
-        
-        //Bus Details Button
-        btnDetails.setBackground(new Color(112, 161, 180));
-        btnDetails.setForeground(Color.WHITE);
-        btnDetails.setUI(new StyledButtonUI());
-        btnDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+
+        //Bus Route Button
+        btnRoute.setBackground(new Color(112, 161, 180));
+        btnRoute.setForeground(Color.WHITE);
+        btnRoute.setUI(new StyledButtonUI());
+        btnRoute.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDetails.setBackground(new Color(92, 132, 147));
+                btnRoute.setBackground(new Color(92, 132, 147));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDetails.setBackground(new Color(112, 161, 180));
+                btnRoute.setBackground(new Color(112, 161, 180));
             }
         });
-        btnDetails.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnDetails.setText("Bus Details");
-        btnDetails.addActionListener(new java.awt.event.ActionListener() {
+        btnRoute.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnRoute.setText("Bus Route");
+        btnRoute.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetailsActionPerformed(evt);
+                btnRouteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDetails);
-        btnDetails.setBounds(50, 350, 100, 32);
+        getContentPane().add(btnRoute);
+        btnRoute.setBounds(50, 260, 100, 32);
+
+        
+        //Bus Details Button
+        btnBus.setBackground(new Color(112, 161, 180));
+        btnBus.setForeground(Color.WHITE);
+        btnBus.setUI(new StyledButtonUI());
+        btnBus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBus.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBus.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnBus.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnBus.setText("Bus Details");
+        btnBus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBus);
+        btnBus.setBounds(50, 350, 100, 32);
 
         
         //Attendence Button
@@ -212,8 +242,15 @@ public class ProfessorForm extends javax.swing.JFrame {
         this.dispose();
         
     }
+
+    private void btnRouteActionPerformed(java.awt.event.ActionEvent evt) {
+        PBusRoute cb = new PBusRoute();
+        cb.setVisible(true);
+        cb.pack();
+        this.dispose();   
+    }
    
-    private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBusActionPerformed(java.awt.event.ActionEvent evt) {
         checkBusDetails cb = new checkBusDetails();
         cb.setVisible(true);
         cb.pack();
@@ -239,9 +276,11 @@ public class ProfessorForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
 
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDetails;
+    private javax.swing.JButton btnBus;
+    private javax.swing.JButton btnRoute;
     private javax.swing.JButton btnAttendance;
     private javax.swing.JButton btnReserve;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
