@@ -1,25 +1,12 @@
 package GUI;
 import java.awt.Color;
-// import java.awt.Graphics;
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
-// import java.awt.image.BufferedImage;
-// import java.net.URL;
-// import java.text.DateFormat;
-// import java.text.SimpleDateFormat;
-// import java.util.Calendar;
-// import javax.imageio.ImageIO;
-// import javax.swing.JFrame;
-// import javax.swing.JInternalFrame;
-// import javax.swing.JOptionPane;
-// import javax.swing.Timer;
-// import java.io.*;
-// import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import Classes.*;
 
 public class DriverForm extends javax.swing.JFrame {
@@ -40,9 +27,12 @@ public class DriverForm extends javax.swing.JFrame {
     private void initComponents() {
 
         //lblNow = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-      
+        jLabelAttendence = new javax.swing.JLabel();
+        jLabelBus = new javax.swing.JLabel();
+        jLabelRoute = new javax.swing.JLabel();
         btnAttendance = new javax.swing.JButton();
+        btnBus = new javax.swing.JButton();
+        btnRoute = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
@@ -89,11 +79,23 @@ public class DriverForm extends javax.swing.JFrame {
             con.close();  
         }catch(Exception e){System.out.println(e);}  
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel1.setText("View Student Attendance ");
-        jLabel1.setForeground(Color.white);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(396, 350, 250, 20);
+        jLabelAttendence.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelAttendence.setText("View Absenties ");
+        jLabelAttendence.setForeground(Color.white);
+        getContentPane().add(jLabelAttendence);
+        jLabelAttendence.setBounds(396, 330, 250, 20);
+
+        jLabelBus.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelBus.setText("View Bus Details ");
+        jLabelBus.setForeground(Color.white);
+        getContentPane().add(jLabelBus);
+        jLabelBus.setBounds(396, 420, 250, 20);
+
+        jLabelRoute.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelRoute.setText("View Bus Route ");
+        jLabelRoute.setForeground(Color.white);
+        getContentPane().add(jLabelRoute);
+        jLabelRoute.setBounds(396, 510, 250, 20);
 
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
@@ -117,6 +119,8 @@ public class DriverForm extends javax.swing.JFrame {
         getContentPane().add(btnBack);
         btnBack.setBounds(10, 10, 90, 32);
 
+        
+
         //Attendence Button
         btnAttendance.setBackground(new Color(112, 161, 180));
         btnAttendance.setForeground(Color.WHITE);
@@ -130,7 +134,7 @@ public class DriverForm extends javax.swing.JFrame {
             }
         });
         btnAttendance.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnAttendance.setText("Click to view");
+        btnAttendance.setText("Absente");
         btnAttendance.setBackground(new Color(112,148,156));
         btnAttendance.setForeground(Color.white);
         btnAttendance.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +143,58 @@ public class DriverForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAttendance);
-        btnAttendance.setBounds(400, 400, 140, 32);
+        btnAttendance.setBounds(400, 350, 140, 32);
+
+
+        //Bus Details Button
+        btnBus.setBackground(new Color(112, 161, 180));
+        btnBus.setForeground(Color.WHITE);
+        btnBus.setUI(new StyledButtonUI());
+        btnBus.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnBus.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnBus.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnBus.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnBus.setText("Bus");
+        btnBus.setForeground(Color.white);
+
+        
+        btnBus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnBusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBus);
+        btnBus.setBounds(400, 440, 100, 32);
+
+        //Route Details Button
+        btnRoute.setBackground(new Color(112, 161, 180));
+        btnRoute.setForeground(Color.WHITE);
+        btnRoute.setUI(new StyledButtonUI());
+        btnRoute.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnRoute.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnRoute.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnRoute.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnRoute.setText("Route");
+        btnRoute.setForeground(Color.white);
+
+        
+        btnRoute.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnRouteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRoute);
+        btnRoute.setBounds(400, 530, 100, 32);
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,7 +228,21 @@ public class DriverForm extends javax.swing.JFrame {
         ss.pack();
         this.dispose();
     }
-   
+
+    private void btnBusActionPerformed(java.awt.event.ActionEvent evt) {
+        DBusDetails ss = new DBusDetails();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
+    }
+
+    private void btnRouteActionPerformed(java.awt.event.ActionEvent evt) {
+        DBusRoute ss = new DBusRoute();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
+    }
+
 
 
      public static void main(String args[]) {
@@ -205,10 +274,13 @@ public class DriverForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    //private javax.swing.JLabel lblNow;
     private javax.swing.JButton btnAttendance;
+    private javax.swing.JButton btnRoute;
+    private javax.swing.JButton btnBus;
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelAttendence;
+    private javax.swing.JLabel jLabelBus;
+    private javax.swing.JLabel jLabelRoute;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     // End of variables declaration//GEN-END:variables

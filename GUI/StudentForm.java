@@ -278,7 +278,7 @@ public class StudentForm extends javax.swing.JFrame {
         this.dispose();   
     }
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {
-        Absent sl = new Absent();
+        AbsentS sl = new AbsentS();
         sl.setVisible(true);
         sl.pack();
         this.dispose();       

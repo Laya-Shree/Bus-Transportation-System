@@ -13,7 +13,7 @@ import java.sql.*;
 import java.awt.event.*;
 import java.awt.Color;
 
-class getAbsent extends StudentLogin{
+class getAbsentS extends StudentLogin{
 
     public String getId(){
         return s.getID();
@@ -36,11 +36,11 @@ class getAbsent extends StudentLogin{
 }
 
 
-public class Absent extends javax.swing.JFrame {
+public class AbsentS extends javax.swing.JFrame {
 
     //  Creates new form Login
     
-    public Absent() {
+    public AbsentS() {
         initComponents();
         
         this.pack();
@@ -50,7 +50,7 @@ public class Absent extends javax.swing.JFrame {
 
     
     private void initComponents() {
-        s = new getAbsent();
+        s = new getAbsentS();
         titlelabel = new javax.swing.JLabel();
         absentlabel = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
@@ -74,7 +74,7 @@ public class Absent extends javax.swing.JFrame {
         titlelabel.setBounds(200, 200, 500, 20);
 
         absentlabel.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        absentlabel.setText("Absent Date:");
+        absentlabel.setText("AbsentS Date:");
         absentlabel.setForeground(Color.white);
         getContentPane().add(absentlabel);
         absentlabel.setBounds(230, 250, 250, 20);
@@ -216,7 +216,7 @@ public class Absent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Notified The Driver!");
             con.close();  
         }catch(Exception e){System.out.println(e);}
-        Absent bs = new Absent();
+        AbsentS bs = new AbsentS();
         bs.setVisible(true);
         bs.pack();
         this.dispose();         
@@ -232,19 +232,19 @@ public class Absent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Absent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbsentS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Absent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbsentS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Absent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbsentS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Absent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbsentS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Absent().setVisible(true);
+                new AbsentS().setVisible(true);
             }
         });
     }
@@ -257,7 +257,7 @@ public class Absent extends javax.swing.JFrame {
     private javax.swing.JLabel absentlabel;
     private javax.swing.JLabel titlelabel;
     private javax.swing.JTable absentdetails;
-    private getAbsent s;
+    private getAbsentS s;
     private com.toedter.calendar.JDateChooser jDateChooser;
 
     

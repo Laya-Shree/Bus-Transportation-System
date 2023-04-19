@@ -1,21 +1,20 @@
-
 package GUI;
 import java.sql.*;
- import java.awt.event.ActionEvent;
- import java.awt.event.*;
- import java.awt.event.ActionListener;
- import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.Color;
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
-public class checkBusDetails extends javax.swing.JFrame {
+public class DBusRoute extends javax.swing.JFrame {
         
 
      JFrame f;
-     public checkBusDetails() {
+     public DBusRoute() {
         initComponents();
         
         this.pack();
@@ -46,22 +45,22 @@ public class checkBusDetails extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM bus");
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Route");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT * FROM bus");
+            ResultSet rs1=stmt.executeQuery("SELECT * FROM Route");
             int j=0;
             while(rs1.next()){
-                String entry[]= new String[4];
-                for(int i =0; i<4; i++){
+                String entry[]= new String[3];
+                for(int i =0; i<3; i++){
                     entry[i] = rs1.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Bus Number","Driver ID","Bus Capacity","Plate Number"};
+            String column[]={"Bus Number","City","Location"};
             JTable studentDetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(studentDetails);
             sp.setBounds(180,180,1500,500);
@@ -115,7 +114,7 @@ public class checkBusDetails extends javax.swing.JFrame {
         
     }
     private void btnBackActionPerformed(ActionEvent evt) {
-        ProfessorForm lf = new ProfessorForm();
+        DriverForm lf = new DriverForm();
         lf.setVisible(true);
         lf.pack();
         this.dispose();
@@ -132,26 +131,25 @@ public class checkBusDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(checkBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DBusRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(checkBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DBusRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(checkBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DBusRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(checkBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DBusRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
             
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new checkBusDetails().setVisible(true);
+                new DBusRoute().setVisible(true);
             }
         });
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // private javax.swing.JLabel lblNow;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     private javax.swing.JButton btnBack;

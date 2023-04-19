@@ -251,7 +251,7 @@ public class ProfessorForm extends javax.swing.JFrame {
     }
    
     private void btnBusActionPerformed(java.awt.event.ActionEvent evt) {
-        checkBusDetails cb = new checkBusDetails();
+        PBusDetails cb = new PBusDetails();
         cb.setVisible(true);
         cb.pack();
         this.dispose();   

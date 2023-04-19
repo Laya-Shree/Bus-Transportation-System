@@ -41,12 +41,10 @@ public class AbsentList extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
-
-
         
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Admin Page | Ride With Us");
+        setTitle("Driver Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -68,30 +66,28 @@ public class AbsentList extends javax.swing.JFrame {
             int rows=0;
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             
 
-            PreparedStatement countrow = con.prepareStatement("SELECT COUNT(*) FROM absent WHERE BusNo = ?");
-            countrow.setInt(1,n.getBus());
+            PreparedStatement countrow = con.prepareStatement("SELECT count(*) FROM Absent WHERE ID in (SELECT ID FROM Reserved WHERE BusNo ="+n.getBus()+")");
             ResultSet rs1=countrow.executeQuery();
             rs1.next();
             rows = rs1.getInt(1);
             String data[][] = new String[rows][];  
 
-            PreparedStatement details = con.prepareStatement("SELECT Date, StudentName, Address, ContactNo FROM absent Where BusNo = ?");
-            details.setInt(1,n.getBus());
+            PreparedStatement details = con.prepareStatement("SELECT Date,ID,Name,Street,Bldg FROM Absent WHERE ID in (SELECT ID FROM Reserved WHERE BusNo ="+n.getBus()+")");
             ResultSet rs2=details.executeQuery();
 
             int j=0;
             while(rs2.next()){
-                String entry[]= new String[4];
-                for(int i =0; i<4; i++){
+                String entry[]= new String[5];
+                for(int i =0; i<5; i++){
                     entry[i] = rs2.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Date","Student Name","Address","Contact No."};
+            String column[]={"Date","ID","Name","Street","Building"};
             studentdetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(studentdetails);
             sp.setBounds(800,180,1000,600);
@@ -183,7 +179,6 @@ public class AbsentList extends javax.swing.JFrame {
     
 
     private void btnFilterActionPerformed(ActionEvent evt) {
-        
         ds.setdate(textDate.getText());
         Filter ss = new Filter();
         ss.setVisible(true);

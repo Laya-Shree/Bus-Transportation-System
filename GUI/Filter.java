@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 import java.sql.*;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import Classes.*;
@@ -42,7 +41,7 @@ public class Filter extends javax.swing.JFrame {
         
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Admin Page | Ride With Us");
+        setTitle("Driver Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -54,40 +53,35 @@ public class Filter extends javax.swing.JFrame {
         
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*");  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             
-            PreparedStatement countrow = con.prepareStatement("SELECT COUNT(*) FROM absent WHERE BusNo = ? and Date = ?");
-            countrow.setInt(1,n.getBus());
-            countrow.setString(2,d.date());
+            PreparedStatement countrow = con.prepareStatement("SELECT COUNT(*) FROM absent WHERE Date =? AND ID in (SELECT ID FROM Reserved WHERE BusNo ="+n.getBus()+")");
+            countrow.setString(1,d.date());
             ResultSet rs0=countrow.executeQuery();
             rs0.next();
             rows = rs0.getInt(1);
             String data[][] = new String[rows][];  
-            PreparedStatement select = con.prepareStatement("SELECT Date, StudentName, Address, ContactNo FROM absent Where BusNo = ? and Date = ?");
-            select.setInt(1,n.getBus());
-            select.setString(2,d.date());
+            PreparedStatement select = con.prepareStatement("SELECT Date,ID,Name,Street,Bldg FROM Absent WHERE Date=? AND ID in (SELECT ID FROM Reserved WHERE BusNo ="+n.getBus()+")");
+            select.setString(1,d.date());
             select.executeQuery();
             ResultSet rs=select.executeQuery();
         
             int j=0;
             while(rs.next()){
-                String entry[]= new String[4];
-                for(int i =0; i<4; i++){
+                String entry[]= new String[5];
+                for(int i =0; i<5; i++){
                     entry[i] = rs.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Date","Student Name","Address","Contact No."};
+            String column[]={"Date","ID","Name","Street","Building"};
             studentdetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(studentdetails);
             sp.setBounds(180,180,1500,500);
             getContentPane().add(sp);
             setVisible(true);
             con.close();  
-        
-
-
         }catch(Exception e){System.out.println(e);}
         
 
