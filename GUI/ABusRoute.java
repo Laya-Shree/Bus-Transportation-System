@@ -10,11 +10,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
-public class PBusRoute extends javax.swing.JFrame {
+public class ABusRoute extends javax.swing.JFrame {
         
 
      JFrame f;
-     public PBusRoute() {
+     public ABusRoute() {
         initComponents();
         
         this.pack();
@@ -30,7 +30,7 @@ public class PBusRoute extends javax.swing.JFrame {
         panelStatus = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Professor Page | Ride With Us");
+        setTitle("Admin Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -43,12 +43,12 @@ public class PBusRoute extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Route");
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Route ORDER BY Busno");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT * FROM Route");
+            ResultSet rs1=stmt.executeQuery("SELECT * FROM Route ORDER BY Busno");
             int j=0;
             while(rs1.next()){
                 String entry[]= new String[3];
@@ -109,7 +109,7 @@ public class PBusRoute extends javax.swing.JFrame {
         
     }
     private void btnBackActionPerformed(ActionEvent evt) {
-        ProfessorForm lf = new ProfessorForm();
+        AdminForm lf = new AdminForm();
         lf.setVisible(true);
         lf.pack();
         this.dispose();
@@ -123,3 +123,4 @@ public class PBusRoute extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     // End of variables declaration//GEN-END:variables
 }
+

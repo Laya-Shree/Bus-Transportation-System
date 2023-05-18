@@ -1,17 +1,10 @@
 package GUI;
-// import java.awt.BorderLayout;
 import java.awt.Color;
 import java.sql.*;
-
 import javax.swing.JButton;
-// import java.text.DateFormat;
-// import java.text.SimpleDateFormat;
-// import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-// import javax.swing.Timer;
-// import javax.swing.JScrollPane;
 import javax.swing.JScrollPane;
 
 
@@ -30,7 +23,6 @@ public class Announcement extends javax.swing.JFrame {
   
     private void initComponents() {
 
-        // lblNow = new javax.swing.JLabel();
         message = new javax.swing.JTextArea();
         JButton btnDone = new JButton();
         JButton btnBack = new JButton();
@@ -41,7 +33,7 @@ public class Announcement extends javax.swing.JFrame {
 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Student Page | Ride With Us");
+        setTitle("Admin Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -147,8 +139,6 @@ public class Announcement extends javax.swing.JFrame {
    
             con.close();  
         }catch(Exception e){System.out.println(e);}  
-
-
         
     }
  
@@ -184,7 +174,6 @@ public class Announcement extends javax.swing.JFrame {
     }
 
     // Variables declaration
-    // private javax.swing.JLabel lblNow;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JTextArea message;
     // End of variables declaration//GEN-END:variables

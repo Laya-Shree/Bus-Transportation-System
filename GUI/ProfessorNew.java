@@ -265,7 +265,7 @@ public class ProfessorNew extends javax.swing.JFrame {
             //Professor s = new Professor(FirstN,LastN,Id,street,city,PhoneNo);
             String p = new String(passWord);
             bw.write(IdText.getText()+","+p+"\n");
-            JOptionPane.showMessageDialog(null, "New User created"); 
+            //JOptionPane.showMessageDialog(null, "New User created"); 
             
         }
         catch(FileNotFoundException ex){

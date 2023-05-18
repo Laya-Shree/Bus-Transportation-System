@@ -114,12 +114,6 @@ public class AdminNew extends javax.swing.JFrame {
         getContentPane().add(btnCancel);
         btnCancel.setBounds(400, 400, 90, 32);
 
-        /*jLabel3.setFont(new java.awt.Font("Freestyle Script", 0, 48)); 
-        //jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Ride With Us");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(250, 25, 200, 50); */
-
         btnCreateAccount.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnCreateAccount.setText("CreateAccount");
         btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -143,10 +137,6 @@ public class AdminNew extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        /*jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/bus.gif"))); 
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 700, 650); */
 
         pack();
     }
@@ -175,15 +165,9 @@ public class AdminNew extends javax.swing.JFrame {
 
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {
-       /*  Name = Name.getText();
-        Id = Id.getText();
-        String[] loginDetails = new String[4];
-      String Name = "";
-      String Id = "";*/
+      
 	    try(PrintWriter write = new PrintWriter(new FileOutputStream("newAccountA.txt"))){
         
-	    	// boolean end = false;
-            // Admin s = new Admin(Name,PhoneNo);
             write.println(FirstNameText.getText()+","+LastNameText.getText()+","+PhoneNoText.getText());
             JOptionPane.showMessageDialog(null, "New User created"); 
         }

@@ -1,5 +1,4 @@
 package GUI;
-
 import java.sql.*;
 
 public class Professor {

@@ -1,10 +1,9 @@
-
 package GUI;
 import java.sql.*;
- import java.awt.event.ActionEvent;
- import java.awt.event.*;
- import java.awt.event.ActionListener;
- import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.Color;
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -26,14 +25,12 @@ public class PBusDetails extends javax.swing.JFrame {
     
     private void initComponents() {
 
-
-        // lblNow = new javax.swing.JLabel();
         btnBack = new JButton();
         dp = new JDesktopPane();
         panelStatus = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Student Page | Ride With Us");
+        setTitle("Professor Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -122,36 +119,7 @@ public class PBusDetails extends javax.swing.JFrame {
    
     }
  
-     public static void main(String args[]) {
-       
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-            
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PBusDetails().setVisible(true);
-            }
-        });
-        
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // private javax.swing.JLabel lblNow;
+    // Variables declaration - do not modify//GE-BEGIN:variables
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     private javax.swing.JButton btnBack;

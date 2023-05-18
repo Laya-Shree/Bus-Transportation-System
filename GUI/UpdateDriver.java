@@ -1,8 +1,11 @@
 package GUI;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.JButton;
@@ -32,12 +35,14 @@ public class UpdateDriver extends javax.swing.JFrame {
         JButton btnEdit = new JButton();
         JButton btnAdd = new JButton();
         JButton btnDelete = new JButton();
+        textfpswd = new javax.swing.JTextField();
         textfname = new javax.swing.JTextField();
         textfcontact = new javax.swing.JTextField();
         textfid = new javax.swing.JTextField();
         idlabel = new javax.swing.JLabel();
         namelabel = new javax.swing.JLabel();
         contactlabel = new javax.swing.JLabel();
+        pswdlabel = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
@@ -51,6 +56,14 @@ public class UpdateDriver extends javax.swing.JFrame {
         setResizable(true);
         getContentPane().setLayout(null);
 
+        textfpswd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                //textField1ActionPerformed(evt);
+            }
+        });
+
+        getContentPane().add(textfpswd);
+        textfpswd.setBounds(450, 200, 180, 30);
        
 
         textfid.addActionListener(new ActionListener() {
@@ -123,6 +136,11 @@ public class UpdateDriver extends javax.swing.JFrame {
             con.close();  
         }catch(Exception e){System.out.println(e);} 
         
+        pswdlabel.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        pswdlabel.setText("Login Password:");
+        pswdlabel.setForeground(Color.white);
+        getContentPane().add(pswdlabel);
+        pswdlabel.setBounds(200, 200, 250, 20);
 
         idlabel.setFont(new java.awt.Font("SansSerif", 0, 14)); 
         idlabel.setText("Driver ID:");
@@ -262,7 +280,18 @@ public class UpdateDriver extends javax.swing.JFrame {
     private void btnAddActionPerformed(ActionEvent evt) {
         String driverID = textfid.getText();
         String dname = textfname.getText();
+        String passWord = textfpswd.getText();
         int contactno = Integer.parseInt(textfcontact.getText());
+        try(PrintWriter bw = new PrintWriter(new BufferedWriter(new FileWriter("DloginDetails.txt",true)))){
+            bw.write(driverID+","+passWord+"\n");
+            
+        }
+	    catch(FileNotFoundException ex){
+	    	 JOptionPane.showMessageDialog(null,"File Not Found");
+	    }
+	    catch(Exception ex){
+	    	 JOptionPane.showMessageDialog(null,ex.getMessage());
+	    }
 
         try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
@@ -362,8 +391,10 @@ public class UpdateDriver extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JTable driverdetails;
     private javax.swing.JLabel idlabel;
+    private javax.swing.JLabel pswdlabel;
     private javax.swing.JLabel namelabel;
     private javax.swing.JLabel contactlabel;
+    private javax.swing.JTextField textfpswd;
     private javax.swing.JTextField textfcontact;
     private javax.swing.JTextField textfname;
     private javax.swing.JTextField textfid;

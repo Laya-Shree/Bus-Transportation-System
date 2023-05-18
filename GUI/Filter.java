@@ -8,8 +8,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import Classes.*;
 class getBusNo extends DriverLogin{
-    public int getBus(){
-        return d.getBusNo();
+    public String getID(){
+        return d.getDID();
+    }
+    public int busno(){
+        return d.getbusno();
     }
 }
 class getdate extends AbsentList{
@@ -55,14 +58,17 @@ public class Filter extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             
-            PreparedStatement countrow = con.prepareStatement("SELECT COUNT(*) FROM absent WHERE Date =? AND ID in (SELECT ID FROM Reserved WHERE BusNo ="+n.getBus()+")");
+            PreparedStatement countrow = con.prepareStatement("SELECT COUNT(*) FROM absent WHERE Date=? AND ID in (SELECT ID FROM Reserved WHERE BusNo=?)");
             countrow.setString(1,d.date());
+            countrow.setInt(2,n.busno());
+
             ResultSet rs0=countrow.executeQuery();
             rs0.next();
             rows = rs0.getInt(1);
             String data[][] = new String[rows][];  
-            PreparedStatement select = con.prepareStatement("SELECT Date,ID,Name,Street,Bldg FROM Absent WHERE Date=? AND ID in (SELECT ID FROM Reserved WHERE BusNo ="+n.getBus()+")");
+            PreparedStatement select = con.prepareStatement("SELECT Date,ID,Name,Street,Bldg FROM Absent WHERE Date=? AND ID in (SELECT ID FROM Reserved WHERE BusNo =?)");
             select.setString(1,d.date());
+            select.setInt(2,n.busno());
             select.executeQuery();
             ResultSet rs=select.executeQuery();
         
@@ -136,38 +142,7 @@ public class Filter extends javax.swing.JFrame {
         
     }
 
-
-     public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Filter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Filter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Filter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Filter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Filter().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    //private javax.swing.JLabel lblNow;
-    //private javax.swing.JButton btnAttendance;
     private javax.swing.JButton btnBack;
     private javax.swing.JTable studentdetails;
     private javax.swing.JDesktopPane dp;

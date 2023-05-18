@@ -4,11 +4,9 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import java.sql.*;
 import java.awt.event.*;
 import java.awt.Color;
@@ -221,33 +219,6 @@ public class AbsentS extends javax.swing.JFrame {
         bs.pack();
         this.dispose();         
 	}
-	
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AbsentS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AbsentS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AbsentS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AbsentS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AbsentS().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -259,8 +230,6 @@ public class AbsentS extends javax.swing.JFrame {
     private javax.swing.JTable absentdetails;
     private getAbsentS s;
     private com.toedter.calendar.JDateChooser jDateChooser;
-
-    
     // End of variables declaration//GEN-END:variables
 }
 

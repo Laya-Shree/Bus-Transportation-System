@@ -1,34 +1,33 @@
-
 package GUI;
-
 import java.sql.*;
 
 public class Driver {
     public static String UserName;
-    public static int BusNo;
+    public static int busno;
 
-    void setDriver(String id){
-        UserName = id;
-        try{
+    void setDriver(String id)
+    {
+        UserName = id; 
+
+    }
+    public int getbusno()
+    {
+        try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/bus_transportation","root","*Laya2003*"); 
-            PreparedStatement countrow = con.prepareStatement("SELECT Bus_No FROM bus WHERE Driver_Name =?");
-            countrow.setString(1,UserName);
-            ResultSet rs=countrow.executeQuery();
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
+            PreparedStatement select = con.prepareStatement("SELECT Busno FROM bus WHERE ID='"+UserName+"'");
+            select.executeQuery();
+            ResultSet rs=select.executeQuery();
             rs.next();
-        
-            BusNo = rs.getInt(1);
-            con.close();  
-        }catch(Exception e){System.out.println(e);} 
-
+            
+            busno = rs.getInt(1); 
+        }catch(Exception e){System.out.println(e);}
+        return busno;
     }
-    public String getID(){
+    public String getDID()
+    {
         return UserName;
-    }
-    
-    public int getBusNo(){
-        return BusNo;
     }
 }
 

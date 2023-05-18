@@ -5,11 +5,9 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import java.sql.*;
 import java.awt.event.*;
 import java.awt.Color;
@@ -31,9 +29,6 @@ class getAbsentP extends ProfessorLogin{
     public String getBldg(){
         return p.getBldg();
     }
-    /*public int getContactNo(){
-        return p.getContactNo();
-    }*/
 }
 
 
@@ -190,7 +185,7 @@ public class AbsentP extends javax.swing.JFrame {
     
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
-        StudentForm dLogin = new StudentForm();
+        ProfessorForm dLogin = new ProfessorForm();
         dLogin.pack();
         dLogin.setVisible(true);
         this.dispose();
@@ -224,32 +219,7 @@ public class AbsentP extends javax.swing.JFrame {
         this.dispose();         
 	}
 	
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AbsentP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AbsentP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AbsentP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AbsentP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AbsentP().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

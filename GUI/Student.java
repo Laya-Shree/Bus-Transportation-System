@@ -1,5 +1,4 @@
 package GUI;
-
 import java.sql.*;
 
 public class Student {
@@ -8,6 +7,7 @@ public class Student {
     public static String City;
     public static String Street;
     public static String Bldg;
+    public static String endDate;
     public static int Contact_No;
     public static int BusNo;
 
@@ -45,6 +45,12 @@ public class Student {
     }
     public String getBldg(){
         return Bldg;
+    }
+    public void setendDate(String d){
+        endDate = d;
+    }
+    public String getendDate(){
+        return endDate;
     }
     public int getContactNo(){
         return Contact_No;

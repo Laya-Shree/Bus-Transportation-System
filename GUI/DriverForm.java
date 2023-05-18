@@ -11,8 +11,6 @@ import Classes.*;
 
 public class DriverForm extends javax.swing.JFrame {
         
-    // Creates new form DriverNew
-   
      public static SystemManager manager ;
     
      public DriverForm() {
@@ -26,7 +24,6 @@ public class DriverForm extends javax.swing.JFrame {
     
     private void initComponents() {
 
-        //lblNow = new javax.swing.JLabel();
         jLabelAttendence = new javax.swing.JLabel();
         jLabelBus = new javax.swing.JLabel();
         jLabelRoute = new javax.swing.JLabel();
@@ -135,7 +132,6 @@ public class DriverForm extends javax.swing.JFrame {
         });
         btnAttendance.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnAttendance.setText("Absente");
-        btnAttendance.setBackground(new Color(112,148,156));
         btnAttendance.setForeground(Color.white);
         btnAttendance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +139,7 @@ public class DriverForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAttendance);
-        btnAttendance.setBounds(400, 350, 140, 32);
+        btnAttendance.setBounds(400, 350, 100, 32);
 
 
         //Bus Details Button
@@ -241,36 +237,6 @@ public class DriverForm extends javax.swing.JFrame {
         ss.setVisible(true);
         ss.pack();
         this.dispose();
-    }
-
-
-
-     public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DriverForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DriverForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DriverForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DriverForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DriverForm().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,17 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 import java.sql.*;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-//import java.text.DateFormat;
-//import java.text.SimpleDateFormat;
-//import java.util.Calendar;
-//import javax.swing.JFrame;
-//import javax.swing.Timer;
 import java.awt.Color;
-
 import Classes.*;
 
 public class AdminForm extends javax.swing.JFrame {
@@ -34,16 +26,23 @@ public class AdminForm extends javax.swing.JFrame {
   
     private void initComponents() {
 
-        //lblNow = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        btnStudent = new javax.swing.JButton();
+        jLabelPassengerDetails = new javax.swing.JLabel();
+        jLabelRoute = new javax.swing.JLabel();
+        jLabelPendingFee = new javax.swing.JLabel();
+        jLabelAssignBus = new javax.swing.JLabel();
+        jLabelUpdateBus = new javax.swing.JLabel();
+        jLabelAnnounce = new javax.swing.JLabel();
+        jLabelUpdateDriver = new javax.swing.JLabel();
+        jLabelPBus = new javax.swing.JLabel();
+        btnPassengerDetails = new javax.swing.JButton();
+        btnRoute = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        btnAnnouncements = new javax.swing.JButton();
+        btnAssignBus = new javax.swing.JButton();
+        btnBus = new javax.swing.JButton();
+        btnPayment = new javax.swing.JButton();
         btnUpdatebus = new javax.swing.JButton();
         btnUpdateDriver = new javax.swing.JButton();
+        btnAnnouncements = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
 
@@ -65,7 +64,7 @@ public class AdminForm extends javax.swing.JFrame {
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT Date,Time,Info FROM announcements");
+            ResultSet rs1=stmt.executeQuery("SELECT Date,Time,Info FROM announcements ORDER BY Date DESC");
             int j=0;
             while(rs1.next()){
                 String entry[]= new String[3];
@@ -89,29 +88,53 @@ public class AdminForm extends javax.swing.JFrame {
             con.close();  
         }catch(Exception e){System.out.println(e);}  
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel1.setText("Check Student Details ");
-        jLabel1.setForeground(Color.white);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 330, 200, 20);
+        jLabelPassengerDetails.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelPassengerDetails.setText("View Passenger Details");
+        jLabelPassengerDetails.setForeground(Color.white);
+        getContentPane().add(jLabelPassengerDetails);
+        jLabelPassengerDetails.setBounds(50, 150, 400, 20);
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel2.setText("Update Bus details");
-        jLabel2.setForeground(Color.white);
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 420, 150, 20);
+        jLabelRoute.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelRoute.setText("Check Bus Routes");
+        jLabelRoute.setForeground(Color.white);
+        getContentPane().add(jLabelRoute);
+        jLabelRoute.setBounds(50, 240, 400, 20);
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel3.setText("Announcements");
-        jLabel3.setForeground(Color.white);
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(50, 600, 170, 19);
+        jLabelAssignBus.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelAssignBus.setText("Assign Bus");
+        jLabelAssignBus.setForeground(Color.white);
+        getContentPane().add(jLabelAssignBus);
+        jLabelAssignBus.setBounds(50, 330, 400, 20);
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel4.setText("Update Driver details");
-        jLabel4.setForeground(Color.white);
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(50, 510, 170, 19);
+        jLabelPBus.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelPBus.setText("View Passengers of Bus");
+        jLabelPBus.setForeground(Color.white);
+        getContentPane().add(jLabelPBus);
+        jLabelPBus.setBounds(50, 420, 400, 20);
+
+        jLabelPendingFee.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelPendingFee.setText("View Students With Pending Fee ");
+        jLabelPendingFee.setForeground(Color.white);
+        getContentPane().add(jLabelPendingFee);
+        jLabelPendingFee.setBounds(50, 510, 400, 20);
+
+        jLabelUpdateBus.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelUpdateBus.setText("Update Bus details");
+        jLabelUpdateBus.setForeground(Color.white);
+        getContentPane().add(jLabelUpdateBus);
+        jLabelUpdateBus.setBounds(50, 600, 200, 20);
+
+        jLabelUpdateDriver.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelUpdateDriver.setText("Update Driver details");
+        jLabelUpdateDriver.setForeground(Color.white);
+        getContentPane().add(jLabelUpdateDriver);
+        jLabelUpdateDriver.setBounds(50, 690, 200, 19);
+
+        jLabelAnnounce.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelAnnounce.setText("Announcements");
+        jLabelAnnounce.setForeground(Color.white);
+        getContentPane().add(jLabelAnnounce);
+        jLabelAnnounce.setBounds(50, 780, 170, 19);
 
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
@@ -133,30 +156,116 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack);
-        btnBack.setBounds(50, 260, 100, 32);
+        btnBack.setBounds(50, 90, 100, 32);
 
-        //Student Details Button
-        btnStudent.setBackground(new Color(112, 161, 180));
-        btnStudent.setForeground(Color.WHITE);
-        btnStudent.setUI(new StyledButtonUI());
-        btnStudent.addMouseListener(new MouseAdapter() {
+        btnPassengerDetails.setBackground(new Color(112, 161, 180));
+        btnPassengerDetails.setForeground(Color.WHITE);
+        btnPassengerDetails.setUI(new StyledButtonUI());
+        btnPassengerDetails.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
-                btnStudent.setBackground(new Color(92, 132, 147));
+                btnPassengerDetails.setBackground(new Color(92, 132, 147));
             }
             public void mouseExited(MouseEvent evt) {
-                btnStudent.setBackground(new Color(112, 161, 180));
+                btnPassengerDetails.setBackground(new Color(112, 161, 180));
             }
         });
-        btnStudent.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnStudent.setText("View details");
-        btnStudent.setForeground(Color.white);
-        btnStudent.addActionListener(new ActionListener() {
+        btnPassengerDetails.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnPassengerDetails.setText("Passenger");
+        btnPassengerDetails.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnPassengerDetailsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPassengerDetails);
+        btnPassengerDetails.setBounds(50, 180, 100, 32);
+
+        btnRoute.setBackground(new Color(112, 161, 180));
+        btnRoute.setForeground(Color.WHITE);
+        btnRoute.setUI(new StyledButtonUI());
+        btnRoute.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnRoute.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnRoute.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnRoute.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnRoute.setText("Route");
+        btnRoute.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnRouteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRoute);
+        btnRoute.setBounds(50, 260, 100, 32);
+
+        //Bus Button
+        btnAssignBus.setBackground(new Color(112, 161, 180));
+        btnAssignBus.setForeground(Color.WHITE);
+        btnAssignBus.setUI(new StyledButtonUI());
+        btnAssignBus.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnAssignBus.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnAssignBus.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnAssignBus.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnAssignBus.setText("Assign Bus");
+        btnAssignBus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnAssignBusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAssignBus);
+        btnAssignBus.setBounds(50, 350, 100, 32);
+
+        //Bus Button
+        btnBus.setBackground(new Color(112, 161, 180));
+        btnBus.setForeground(Color.WHITE);
+        btnBus.setUI(new StyledButtonUI());
+        btnBus.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnBus.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnBus.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnBus.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnBus.setText("Bus");
+        btnBus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnBusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBus);
+        btnBus.setBounds(50, 440, 100, 32);
+
+        //Student Details Button
+        btnPayment.setBackground(new Color(112, 161, 180));
+        btnPayment.setForeground(Color.WHITE);
+        btnPayment.setUI(new StyledButtonUI());
+        btnPayment.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnPayment.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnPayment.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnPayment.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnPayment.setText("Pending Fee");
+        btnPayment.setForeground(Color.white);
+        btnPayment.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnStudentActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStudent);
-        btnStudent.setBounds(50, 350, 100, 32);
+        getContentPane().add(btnPayment);
+        btnPayment.setBounds(50, 530, 100, 32);
 
         //Update Bus Details Button
         btnUpdatebus.setBackground(new Color(112, 161, 180));
@@ -181,30 +290,7 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnUpdatebus);
-        btnUpdatebus.setBounds(50, 440, 100, 32);
-
-        //Announcement Button
-        btnAnnouncements.setBackground(new Color(112, 161, 180));
-        btnAnnouncements.setForeground(Color.WHITE);
-        btnAnnouncements.setUI(new StyledButtonUI());
-        btnAnnouncements.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                btnAnnouncements.setBackground(new Color(92, 132, 147));
-            }
-            public void mouseExited(MouseEvent evt) {
-                btnAnnouncements.setBackground(new Color(112, 161, 180));
-            }
-        });
-        btnAnnouncements.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnAnnouncements.setText("Announce");
-        btnAnnouncements.setForeground(Color.white);
-        btnAnnouncements.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                btnAnnouncementActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAnnouncements);
-        btnAnnouncements.setBounds(50, 620, 100, 32);
+        btnUpdatebus.setBounds(50, 620, 100, 32);
 
         //Bus Edit Button
         btnUpdateDriver.setBackground(new Color(112, 161, 180));
@@ -227,7 +313,30 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnUpdateDriver);
-        btnUpdateDriver.setBounds(50, 530, 100, 32);
+        btnUpdateDriver.setBounds(50, 710, 100, 32);
+
+        //Announcement Button
+        btnAnnouncements.setBackground(new Color(112, 161, 180));
+        btnAnnouncements.setForeground(Color.WHITE);
+        btnAnnouncements.setUI(new StyledButtonUI());
+        btnAnnouncements.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnAnnouncements.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnAnnouncements.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnAnnouncements.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnAnnouncements.setText("Announce");
+        btnAnnouncements.setForeground(Color.white);
+        btnAnnouncements.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnAnnouncementActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAnnouncements);
+        btnAnnouncements.setBounds(50, 800, 100, 32);
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,8 +363,36 @@ public class AdminForm extends javax.swing.JFrame {
         ss.pack();
         this.dispose();
     }
+
+    private void btnPassengerDetailsActionPerformed(ActionEvent evt) {
+        PassengerDetails ss = new PassengerDetails();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
+    }
+
+    private void btnRouteActionPerformed(ActionEvent evt) {
+        ABusRoute ss = new ABusRoute();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
+    }
+
+    private void btnAssignBusActionPerformed(ActionEvent evt) {
+        assignBus ss = new assignBus();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
+    }
+
+    private void btnBusActionPerformed(ActionEvent evt) {
+        Bus ss = new Bus();
+        ss.setVisible(true);
+        ss.pack();
+        this.dispose();
+    }
     private void btnStudentActionPerformed(ActionEvent evt) {
-        GetStudentList s = new GetStudentList();
+        DueStudents s = new DueStudents();
         s.setVisible(true);
         s.pack();
         this.dispose();
@@ -280,47 +417,25 @@ public class AdminForm extends javax.swing.JFrame {
         this.dispose();
     }
 
-     
- 
-     public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
- 
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminForm().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    //private javax.swing.JLabel lblNow;
-    private javax.swing.JButton btnStudent;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBus;
+    private javax.swing.JButton btnPayment;
     private javax.swing.JButton btnUpdatebus;
     private javax.swing.JButton btnUpdateDriver;
     private javax.swing.JButton btnAnnouncements;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton btnAssignBus;
+    private javax.swing.JButton btnPassengerDetails;
+    private javax.swing.JButton btnRoute;
+    private javax.swing.JLabel jLabelPassengerDetails;
+    private javax.swing.JLabel jLabelRoute;
+    private javax.swing.JLabel jLabelPendingFee;
+    private javax.swing.JLabel jLabelAssignBus;
+    private javax.swing.JLabel jLabelUpdateBus;
+    private javax.swing.JLabel jLabelAnnounce;
+    private javax.swing.JLabel jLabelUpdateDriver;
+    private javax.swing.JLabel jLabelPBus;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     // End of variables declaration//GEN-END:variables

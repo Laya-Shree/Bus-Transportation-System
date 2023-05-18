@@ -10,9 +10,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import Classes.*;
-class getBusNo extends DriverLogin{
-    public int getBus(){
-        return d.getBusNo();
+class get extends DriverLogin{
+    public String getId(){
+        return d.getDID();
     }
 }
 
@@ -20,7 +20,7 @@ public class AbsentList extends javax.swing.JFrame {
         
     // Creates new form DriverNew
     JTextField textDate = new JTextField();
-    getBusNo n = new getBusNo();
+    get n= new get();
     String date = textDate.getText();
     DateStore ds = new DateStore();
 
@@ -69,13 +69,13 @@ public class AbsentList extends javax.swing.JFrame {
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             
 
-            PreparedStatement countrow = con.prepareStatement("SELECT count(*) FROM Absent WHERE ID in (SELECT ID FROM Reserved WHERE BusNo ="+n.getBus()+")");
+            PreparedStatement countrow = con.prepareStatement("SELECT count(*) FROM Absent WHERE ID in (SELECT r.ID FROM Reserved r,bus b WHERE r.busno=b.busno AND b.id ='"+n.getId()+"')");
             ResultSet rs1=countrow.executeQuery();
             rs1.next();
             rows = rs1.getInt(1);
             String data[][] = new String[rows][];  
 
-            PreparedStatement details = con.prepareStatement("SELECT Date,ID,Name,Street,Bldg FROM Absent WHERE ID in (SELECT ID FROM Reserved WHERE BusNo ="+n.getBus()+")");
+            PreparedStatement details = con.prepareStatement("SELECT Date,ID,Name,Street,Bldg FROM Absent WHERE ID in (SELECT r.ID FROM Reserved r,bus b WHERE r.busno=b.busno AND b.id ='"+n.getId()+"')");
             ResultSet rs2=details.executeQuery();
 
             int j=0;
@@ -94,7 +94,7 @@ public class AbsentList extends javax.swing.JFrame {
             getContentPane().add(sp);
             setVisible(true);
             con.close();  
-        }catch(Exception e){System.out.println(e);} 
+        }catch(Exception e){System.out.println(e+"Its me again!");} 
         
 
         datelabel.setFont(new java.awt.Font("SansSerif", 0, 14)); 
@@ -186,41 +186,8 @@ public class AbsentList extends javax.swing.JFrame {
         this.dispose();
         
     }
- 
-   
-
-
-     public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AbsentList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AbsentList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AbsentList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AbsentList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AbsentList().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    //private javax.swing.JLabel lblNow;
-    //private javax.swing.JButton btnAttendance;
     private javax.swing.JButton btnBack;
     private javax.swing.JTable studentdetails;
     private javax.swing.JLabel datelabel;

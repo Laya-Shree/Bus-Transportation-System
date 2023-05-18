@@ -9,7 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-
+class id extends StudentLogin{
+    public String getId(){
+        return s.getID();
+    }
+}
 public class Payment extends javax.swing.JFrame {
         
 
@@ -24,14 +28,13 @@ public class Payment extends javax.swing.JFrame {
      
     
     private void initComponents() {
-
         textFAmount = new javax.swing.JTextField();
         jLabelAmount = new javax.swing.JLabel();
         btnBack = new JButton();
         btnPay = new JButton();
         dp = new JDesktopPane();
         panelStatus = new JPanel();
-
+        obj = new id();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -46,12 +49,12 @@ public class Payment extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM payment");
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Payment_history WHERE ID ='"+obj.getId()+"'");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT * FROM payment");
+            ResultSet rs1=stmt.executeQuery("SELECT Date,Amount FROM Payment_history WHERE ID ='"+obj.getId()+"'");
             int j=0;
             while(rs1.next()){
                 String entry[]= new String[2];
@@ -164,7 +167,7 @@ public class Payment extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
              
-            PreparedStatement insert = con.prepareStatement("INSERT INTO Payment (Date,Amount) VALUES (curDate(),"+Amount+")");
+            PreparedStatement insert = con.prepareStatement("INSERT INTO Payment_history VALUES ('"+obj.getId()+"',curDate(),"+Amount+")");
             insert.executeUpdate();
             JOptionPane.showMessageDialog(null,"Record Added!");
             con.close();  
@@ -174,34 +177,6 @@ public class Payment extends javax.swing.JFrame {
         bs.pack();
         this.dispose();
     }
- 
-     public static void main(String args[]) {
-       
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-            
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Payment().setVisible(true);
-            }
-        });
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dp;
@@ -210,5 +185,6 @@ public class Payment extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JTextField textFAmount;
     private javax.swing.JLabel jLabelAmount;
+    private id obj;
     // End of variables declaration//GEN-END:variables
 }

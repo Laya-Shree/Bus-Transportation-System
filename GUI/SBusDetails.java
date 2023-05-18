@@ -44,22 +44,22 @@ public class SBusDetails extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM bus");
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM bus,driver WHERE D_ID = ID;");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT * FROM bus");
+            ResultSet rs1=stmt.executeQuery("SELECT Busno,capacity,plate_no,Name,contact FROM bus,driver WHERE D_ID = ID;");
             int j=0;
             while(rs1.next()){
-                String entry[]= new String[4];
-                for(int i =0; i<4; i++){
+                String entry[]= new String[5];
+                for(int i =0; i<5; i++){
                     entry[i] = rs1.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Bus Number","Driver ID","Bus Capacity","Plate Number"};
+            String column[]={"Bus Number","Bus Capacity","Plate Number","Driver Name","Driver Contact"};
             JTable studentDetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(studentDetails);
             sp.setBounds(180,180,1500,500);

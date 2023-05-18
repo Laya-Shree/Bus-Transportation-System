@@ -1,4 +1,3 @@
-
 package GUI;
 import java.sql.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +8,6 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 
 public class DBusDetails extends javax.swing.JFrame {
         
@@ -26,14 +24,12 @@ public class DBusDetails extends javax.swing.JFrame {
     
     private void initComponents() {
 
-
-        // lblNow = new javax.swing.JLabel();
         btnBack = new JButton();
         dp = new JDesktopPane();
         panelStatus = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Student Page | Ride With Us");
+        setTitle("Driver Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -70,9 +66,6 @@ public class DBusDetails extends javax.swing.JFrame {
             con.close();  
         }catch(Exception e){System.out.println(e);}  
 
-        
-       
-     
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
         btnBack.setForeground(Color.WHITE);
@@ -122,36 +115,7 @@ public class DBusDetails extends javax.swing.JFrame {
    
     }
  
-     public static void main(String args[]) {
-       
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DBusDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-            
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DBusDetails().setVisible(true);
-            }
-        });
-        
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // private javax.swing.JLabel lblNow;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     private javax.swing.JButton btnBack;

@@ -9,7 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-
+class did extends DriverLogin{
+    public String getId(){
+        return d.getDID();
+    }
+}
 public class DBusRoute extends javax.swing.JFrame {
         
 
@@ -24,15 +28,13 @@ public class DBusRoute extends javax.swing.JFrame {
      
     
     private void initComponents() {
-
-
-        // lblNow = new javax.swing.JLabel();
+        d = new did();
         btnBack = new JButton();
         dp = new JDesktopPane();
         panelStatus = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Student Page | Ride With Us");
+        setTitle("Driver Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -40,17 +42,17 @@ public class DBusRoute extends javax.swing.JFrame {
         //sql
         
         try{ 
-            int rows; 
+            int rows=0; 
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Route");
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Reserved r, Passenger p, Route rt, bus b WHERE rt.busno=b.busno and b.ID='"+d.getId()+"' and r.ID=p.ID and p.street=rt.location and r.enddate>=curdate()");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
-
-            ResultSet rs1=stmt.executeQuery("SELECT * FROM Route");
+            //SELECT rt.busno,rt.city,rt.location FROM Reserved r, Passenger p, Route rt, bus b WHERE rt.busno=b.busno and b.ID='2021001D' and r.ID=p.ID and p.street=rt.location and r.enddate>=curdate();
+            ResultSet rs1=stmt.executeQuery("SELECT rt.busno,rt.city,rt.location FROM Reserved r, Passenger p, Route rt, bus b WHERE rt.busno=b.busno and b.ID='"+d.getId()+"' and r.ID=p.ID and p.street=rt.location and r.enddate>=curdate()");
             int j=0;
             while(rs1.next()){
                 String entry[]= new String[3];
@@ -69,9 +71,6 @@ public class DBusRoute extends javax.swing.JFrame {
             con.close();  
         }catch(Exception e){System.out.println(e);}  
 
-        
-       
-     
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
         btnBack.setForeground(Color.WHITE);
@@ -120,38 +119,11 @@ public class DBusRoute extends javax.swing.JFrame {
         this.dispose();
    
     }
- 
-     public static void main(String args[]) {
-       
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DBusRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DBusRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DBusRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DBusRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-            
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DBusRoute().setVisible(true);
-            }
-        });
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     private javax.swing.JButton btnBack;
+    private did d;
     // End of variables declaration//GEN-END:variables
 }

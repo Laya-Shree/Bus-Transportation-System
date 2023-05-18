@@ -10,11 +10,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
-public class PBusRoute extends javax.swing.JFrame {
+public class DueStudents extends javax.swing.JFrame {
         
 
      JFrame f;
-     public PBusRoute() {
+     public DueStudents() {
         initComponents();
         
         this.pack();
@@ -30,7 +30,7 @@ public class PBusRoute extends javax.swing.JFrame {
         panelStatus = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Professor Page | Ride With Us");
+        setTitle("Admin Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -38,27 +38,30 @@ public class PBusRoute extends javax.swing.JFrame {
         //sql
         
         try{ 
-            int rows; 
+            int rows=0; 
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
-            Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Route");
-            rs.next();
-            rows = rs.getInt(1);
+            CallableStatement stmt1=con.prepareCall("{call amt_check()}");  
+            ResultSet rs1=stmt1.executeQuery();
+            while(rs1.next()){
+                rows++;
+            }
+
+            CallableStatement stmt=con.prepareCall("{call amt_check()}");  
+            ResultSet rs=stmt.executeQuery();
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT * FROM Route");
             int j=0;
-            while(rs1.next()){
-                String entry[]= new String[3];
-                for(int i =0; i<3; i++){
-                    entry[i] = rs1.getString(i+1);
+            while(rs.next()){
+                String entry[]= new String[2];
+                for(int i =0; i<2; i++){
+                    entry[i] = rs.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Bus Number","City","Location"};
+            String column[]={"Student ID","Due"};
             JTable studentDetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(studentDetails);
             sp.setBounds(180,180,1500,500);
@@ -109,13 +112,12 @@ public class PBusRoute extends javax.swing.JFrame {
         
     }
     private void btnBackActionPerformed(ActionEvent evt) {
-        ProfessorForm lf = new ProfessorForm();
+        AdminForm lf = new AdminForm();
         lf.setVisible(true);
         lf.pack();
         this.dispose();
    
     }
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dp;

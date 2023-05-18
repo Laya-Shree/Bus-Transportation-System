@@ -10,11 +10,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
-public class PBusRoute extends javax.swing.JFrame {
+public class PassengerDetails extends javax.swing.JFrame {
         
 
      JFrame f;
-     public PBusRoute() {
+     public PassengerDetails() {
         initComponents();
         
         this.pack();
@@ -30,7 +30,7 @@ public class PBusRoute extends javax.swing.JFrame {
         panelStatus = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Professor Page | Ride With Us");
+        setTitle("Admin Page | Ride With Us");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1900,990));
         setResizable(true);
@@ -43,22 +43,22 @@ public class PBusRoute extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Route");
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Passenger");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            ResultSet rs1=stmt.executeQuery("SELECT * FROM Route");
+            ResultSet rs1=stmt.executeQuery("SELECT * FROM Passenger");
             int j=0;
             while(rs1.next()){
-                String entry[]= new String[3];
-                for(int i =0; i<3; i++){
+                String entry[]= new String[6];
+                for(int i =0; i<6; i++){
                     entry[i] = rs1.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"Bus Number","City","Location"};
+            String column[]={"ID","Name","Contact Number","City","Street","Building"};
             JTable studentDetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(studentDetails);
             sp.setBounds(180,180,1500,500);
@@ -109,7 +109,7 @@ public class PBusRoute extends javax.swing.JFrame {
         
     }
     private void btnBackActionPerformed(ActionEvent evt) {
-        ProfessorForm lf = new ProfessorForm();
+        AdminForm lf = new AdminForm();
         lf.setVisible(true);
         lf.pack();
         this.dispose();
@@ -123,3 +123,5 @@ public class PBusRoute extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     // End of variables declaration//GEN-END:variables
 }
+
+

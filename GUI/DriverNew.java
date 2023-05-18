@@ -6,7 +6,6 @@ import Classes.*;
 
 public class DriverNew extends javax.swing.JFrame {
 
-    //Creates new form DriverNew
     Name Name;
     String FirstN ="";
     String LastN = "";
@@ -108,11 +107,6 @@ public class DriverNew extends javax.swing.JFrame {
         getContentPane().add(btnCancel);
         btnCancel.setBounds(400, 400, 90, 32);
 
-        /*jLabel3.setFont(new java.awt.Font("Freestyle Script", 0, 48)); 
-        //jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Ride With Us");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(250, 25, 200, 50); */
 
         btnCreateAccount.setFont(new java.awt.Font("SansSerif", 0, 12)); 
         btnCreateAccount.setText("CreateAccount");
@@ -123,10 +117,6 @@ public class DriverNew extends javax.swing.JFrame {
         });
         getContentPane().add(btnCreateAccount);
         btnCreateAccount.setBounds(200, 400, 150, 32);
-
-        /*jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/bus.gif"))); 
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 700, 650); */
 
         pack();
     }
@@ -157,8 +147,6 @@ public class DriverNew extends javax.swing.JFrame {
        
 	    try(PrintWriter write = new PrintWriter(new FileOutputStream("DloginDetails.txt"))){
         
-	    	// boolean end = false;
-            // Driver s = new Driver(Name,PhoneNo);
             String p = new String(passWord);
             write.println(FirstNameText.getText()+","+LastNameText.getText()+","+PhoneNoText.getText()+","+p);
 	    }

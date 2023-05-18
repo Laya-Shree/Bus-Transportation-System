@@ -6,7 +6,6 @@ import java.awt.Color;
 public class AdminLogin extends javax.swing.JFrame {
 
     // Creates new form AdminLogin
-
     String username = "";
     char[] passWord;
     

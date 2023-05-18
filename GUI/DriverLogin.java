@@ -7,7 +7,6 @@ import java.awt.Color;
 
 public class DriverLogin extends javax.swing.JFrame {
 
-    // Creates new form DriverLogin
     Driver d = new Driver();
     String username = "";
     char[] passWord ;
@@ -182,7 +181,7 @@ public class DriverLogin extends javax.swing.JFrame {
 
 	    		loginDetails = read.nextLine().split(",");
 	    		userName = loginDetails[0];
-	    		password = loginDetails[2];
+	    		password = loginDetails[1];
 
                             if(userName.compareTo(username)==0 && password.compareTo(p)==0){
                                 d.setDriver(userName);

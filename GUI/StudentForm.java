@@ -1,15 +1,18 @@
-
 package GUI;
 import java.sql.*;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Color;
 import Classes.*;
+
+class id1 extends StudentLogin{
+    public String getId(){
+        return s.getID();
+    }
+}
+
 public class StudentForm extends javax.swing.JFrame {
         
-    /**
-     * Creates new form StudentNew
-     */
    
      public static SystemManager manager ;
     
@@ -23,16 +26,14 @@ public class StudentForm extends javax.swing.JFrame {
     }
 
     private void initComponents() {
+        i = new id1();
 
-        //lblNow = new javax.swing.JLabel();
-        //jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
-        // btnBook = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
         btnAttendance = new javax.swing.JButton();
@@ -57,11 +58,13 @@ public class StudentForm extends javax.swing.JFrame {
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
             ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Announcements");
+            
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
             ResultSet rs1=stmt.executeQuery("SELECT Date, time, Info FROM Announcements");
+            
             int j=0;
             while(rs1.next()){
                 String entry[]= new String[3];
@@ -72,18 +75,45 @@ public class StudentForm extends javax.swing.JFrame {
                 j++;
             }  
             String column[]={"Date","Time","Announcement"};
-            JTable studentDetails = new JTable(data,column);
-            studentDetails.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            studentDetails.getColumnModel().getColumn(0).setPreferredWidth(90);
-            studentDetails.getColumnModel().getColumn(1).setPreferredWidth(90);
-            studentDetails.getColumnModel().getColumn(2).setPreferredWidth(620);
+            JTable announcement = new JTable(data,column);
+            announcement.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            announcement.getColumnModel().getColumn(0).setPreferredWidth(90);
+            announcement.getColumnModel().getColumn(1).setPreferredWidth(90);
+            announcement.getColumnModel().getColumn(2).setPreferredWidth(620);
+
             
-            JScrollPane sp=new JScrollPane(studentDetails);
-            sp.setBounds(1000,180,800,600);
+            JScrollPane sp=new JScrollPane(announcement);
+            sp.setBounds(1000,300,800,500);
             getContentPane().add(sp);
             setVisible(true);
             con.close();  
-        }catch(Exception e){System.out.println(e+"Here");}  
+        }catch(Exception e){System.out.println(e);}  
+
+        try{ 
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
+            Statement stmt=con.createStatement();  
+            
+            String data1[][] = new String[1][];
+            ResultSet rs2=stmt.executeQuery("SELECT ID,dues,Amount,(dues-Amount) AS Balance FROM payment_status WHERE ID='"+i.getId()+"'");
+            
+            rs2.next();
+            String row[] = new String[4];
+            for(int i=0; i<4; i++){
+                row[i] = rs2.getString(i+1);
+            }
+            data1[0]=row;
+            
+            String column1[]={"ID","Due","Amount Paid","Balance"};
+            JTable Payment_status = new JTable(data1,column1);
+
+            JScrollPane sp0=new JScrollPane(Payment_status);
+            sp0.setBounds(1000,180,800,100);
+            getContentPane().add(sp0);
+            setVisible(true);
+            con.close();  
+        }catch(Exception e){System.out.println(e);}
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); 
         jLabel2.setText("View Bus Details");
@@ -319,5 +349,6 @@ public class StudentForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
+    private id1 i;
     // End of variables declaration//GEN-END:variables
 }

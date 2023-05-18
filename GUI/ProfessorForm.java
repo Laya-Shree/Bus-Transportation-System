@@ -28,12 +28,12 @@ public class ProfessorForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        //jLabel4 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnBus = new javax.swing.JButton();
         btnRoute = new javax.swing.JButton();
         btnAttendance = new javax.swing.JButton();
-        btnReserve = new javax.swing.JButton();
+        //btnReserve = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
 
@@ -99,11 +99,11 @@ public class ProfessorForm extends javax.swing.JFrame {
         jLabel3.setForeground(Color.white);
 
         //Reserve Button
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel4.setText("Reserve your Seat");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(50, 510, 120, 18);
-        jLabel4.setForeground(Color.white);
+        // jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        // jLabel4.setText("Reserve your Seat");
+        // getContentPane().add(jLabel4);
+        // jLabel4.setBounds(50, 510, 120, 18);
+        // jLabel4.setForeground(Color.white);
 
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
@@ -197,26 +197,26 @@ public class ProfessorForm extends javax.swing.JFrame {
         btnAttendance.setBounds(50, 440, 100, 32);
 
         //Reserve Button
-        btnReserve.setBackground(new Color(112, 161, 180));
-        btnReserve.setForeground(Color.WHITE);
-        btnReserve.setUI(new StyledButtonUI());
-        btnReserve.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReserve.setBackground(new Color(92, 132, 147));
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnReserve.setBackground(new Color(112, 161, 180));
-            }
-        });
-        btnReserve.setFont(new java.awt.Font("SansSerif", 0, 12)); 
-        btnReserve.setText("Reservation");
-        btnReserve.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReserveActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnReserve);
-        btnReserve.setBounds(50, 530, 100, 32);
+        // btnReserve.setBackground(new Color(112, 161, 180));
+        // btnReserve.setForeground(Color.WHITE);
+        // btnReserve.setUI(new StyledButtonUI());
+        // btnReserve.addMouseListener(new java.awt.event.MouseAdapter() {
+        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+        //         btnReserve.setBackground(new Color(92, 132, 147));
+        //     }
+        //     public void mouseExited(java.awt.event.MouseEvent evt) {
+        //         btnReserve.setBackground(new Color(112, 161, 180));
+        //     }
+        // });
+        // btnReserve.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        // btnReserve.setText("Reservation");
+        // btnReserve.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         btnReserveActionPerformed(evt);
+        //     }
+        // });
+        // getContentPane().add(btnReserve);
+        // btnReserve.setBounds(50, 530, 100, 32);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,13 +264,13 @@ public class ProfessorForm extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_btnCancelActionPerformed
-    private void btnReserveActionPerformed(java.awt.event.ActionEvent evt) {
-        PReserve s2 = new PReserve();
-        s2.setVisible(true);
-        s2.pack();
-        this.dispose();
+    // private void btnReserveActionPerformed(java.awt.event.ActionEvent evt) {
+    //     PReserve s2 = new PReserve();
+    //     s2.setVisible(true);
+    //     s2.pack();
+    //     this.dispose();
 
-    }
+    // }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -279,11 +279,11 @@ public class ProfessorForm extends javax.swing.JFrame {
     private javax.swing.JButton btnBus;
     private javax.swing.JButton btnRoute;
     private javax.swing.JButton btnAttendance;
-    private javax.swing.JButton btnReserve;
+    //private javax.swing.JButton btnReserve;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    //private javax.swing.JLabel jLabel4;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     // End of variables declaration//GEN-END:variables

@@ -1,4 +1,5 @@
 package GUI;
+import java.util.Calendar;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,18 @@ class getSReserve extends StudentLogin{
 
     public String getId(){
         return s.getID();
+    }
+    public String getCity(){
+        return s.getCity();
+    }
+    public String getStreet(){
+        return s.getStreet();
+    }
+    public String getBldg(){
+        return s.getBldg();
+    }
+    public String getendDate(){
+        return s.getendDate();
     }
  
 }
@@ -36,10 +49,15 @@ public class SReserve extends javax.swing.JFrame {
     private void initComponents() {
         p1 = new getSReserve();
         JButton btnReserve = new JButton();
-        textField1 = new javax.swing.JTextField();
-        textField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        JLabel jLabel2 = new JLabel();
+        JButton btnSetLoc = new JButton();
+        textFCity = new javax.swing.JTextField();
+        textFStreet = new javax.swing.JTextField();
+        textFBldg = new javax.swing.JTextField();
+        textFSem = new javax.swing.JTextField();
+        jLabelCity = new javax.swing.JLabel();
+        jLabelStreet = new javax.swing.JLabel();
+        jLabelBldg = new javax.swing.JLabel();
+        JLabel jLabelSem = new JLabel();
         btnBack = new javax.swing.JButton();
         dp = new javax.swing.JDesktopPane();
         panelStatus = new javax.swing.JPanel();
@@ -51,22 +69,43 @@ public class SReserve extends javax.swing.JFrame {
         setResizable(true);
         getContentPane().setLayout(null);
 
-        textField1.addActionListener(new ActionListener() {
+        textFCity.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //textField1ActionPerformed(evt);
             }
         });
+        getContentPane().add(textFCity);
+        textFCity.setBounds(450, 200, 180, 30);
+        textFCity.setText(p1.getCity());
 
-        getContentPane().add(textField1);
-        textField1.setBounds(450, 290, 180, 30);
-
-        textField2.addActionListener(new ActionListener() {
+        textFStreet.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                //textField2ActionPerformed(evt);
+                //textField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(textField2);
-        textField2.setBounds(450, 380, 180, 30);
+        getContentPane().add(textFStreet);
+        textFStreet.setBounds(450, 290, 180, 30);
+        textFStreet.setText(p1.getStreet());
+
+
+        textFBldg.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                //textField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(textFBldg);
+        textFBldg.setBounds(450, 380, 180, 30);
+        textFBldg.setText(p1.getBldg());
+
+
+        textFSem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                //textFSemActionPerformed(evt);
+            }
+        });
+        getContentPane().add(textFSem);
+        textFSem.setBounds(450, 510, 180, 30);
+        
 
         try{ 
             int rows=0;
@@ -74,45 +113,66 @@ public class SReserve extends javax.swing.JFrame {
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Reserved");
+            
+            ResultSet rs=stmt.executeQuery("SELECT COUNT(*) FROM Reserved WHERE ID='"+p1.getId()+"' ORDER BY Date DESC");
             rs.next();
             rows = rs.getInt(1);
             String data[][] = new String[rows][];  
 
-            PreparedStatement select = con.prepareStatement("SELECT * FROM Reserved");
+            PreparedStatement select = con.prepareStatement("SELECT * FROM Reserved WHERE ID='"+p1.getId()+"' ORDER BY Date DESC");
             //select.setString(1,p1.getId());
             ResultSet rs1=select.executeQuery();
 
             int j=0;
             while(rs1.next()){
-                String entry[]= new String[4];
-                for(int i =0; i<4; i++){
+                String entry[]= new String[5];
+                for(int i =0; i<5; i++){
                     entry[i] = rs1.getString(i+1);
                 }
                 data[j]=entry;
                 j++;
             }  
-            String column[]={"ID","Date","BusNo","Semesters"};
+            String column[]={"ID","Date","BusNo","Semesters","End Date"};
             JTable reserveDetails = new JTable(data,column);
             JScrollPane sp=new JScrollPane(reserveDetails);
             sp.setBounds(1000,180,800,600);
             getContentPane().add(sp);
             setVisible(true);
             con.close();  
-        }catch(Exception e){System.out.println(e);}   
+        }catch(Exception e)
+        {
+            String data[][]={{}};
+            String column[]={"ID","Date","BusNo","Semesters","End Date"};
+            JTable reserveDetails = new JTable(data,column);
+            JScrollPane sp=new JScrollPane(reserveDetails);
+            sp.setBounds(1000,180,800,600);
+            getContentPane().add(sp);
+            setVisible(true);
+        }   
         
+        jLabelCity.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelCity.setText("City");
+        jLabelCity.setForeground(Color.white);
+        getContentPane().add(jLabelCity);
+        jLabelCity.setBounds(200, 200, 250, 20);
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel1.setText("Bus Number");
-        jLabel1.setForeground(Color.white);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(200, 290, 250, 20);
+        jLabelStreet.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelStreet.setText("Street");
+        jLabelStreet.setForeground(Color.white);
+        getContentPane().add(jLabelStreet);
+        jLabelStreet.setBounds(200, 290, 250, 20);
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); 
-        jLabel2.setText("Number of Semesters");
-        jLabel2.setForeground(Color.white);
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(200, 380, 250, 20);
+        jLabelBldg.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelBldg.setText("Building");
+        jLabelBldg.setForeground(Color.white);
+        getContentPane().add(jLabelBldg);
+        jLabelBldg.setBounds(200, 380, 250, 20);
+
+        jLabelSem.setFont(new java.awt.Font("SansSerif", 0, 14)); 
+        jLabelSem.setText("Number of Semesters");
+        jLabelSem.setForeground(Color.white);
+        getContentPane().add(jLabelSem);
+        jLabelSem.setBounds(200, 510, 250, 20);
 
         //Back Button
         btnBack.setBackground(new Color(112, 161, 180));
@@ -136,6 +196,28 @@ public class SReserve extends javax.swing.JFrame {
         getContentPane().add(btnBack);
         btnBack.setBounds(10, 10, 90, 32);
 
+        //Set Location Button
+        btnSetLoc.setBackground(new Color(112, 161, 180));
+        btnSetLoc.setForeground(Color.WHITE);
+        btnSetLoc.setUI(new StyledButtonUI());
+        btnSetLoc.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnSetLoc.setBackground(new Color(92, 132, 147));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnSetLoc.setBackground(new Color(112, 161, 180));
+            }
+        });
+        btnSetLoc.setFont(new java.awt.Font("SansSerif", 0, 12)); 
+        btnSetLoc.setText("Set Location");
+        btnSetLoc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnSetLocActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSetLoc);
+        btnSetLoc.setBounds(400, 440, 120, 32);
+
         //SReserve Button
         btnReserve.setBackground(new Color(112, 161, 180));
         btnReserve.setForeground(Color.WHITE);
@@ -157,7 +239,7 @@ public class SReserve extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnReserve);
-        btnReserve.setBounds(200, 650, 100, 32);
+        btnReserve.setBounds(400, 560, 100, 32);
 
        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,26 +264,91 @@ public class SReserve extends javax.swing.JFrame {
         StudentForm ss = new StudentForm();
         ss.setVisible(true);
         ss.pack();
-        this.dispose();
-        
+        this.dispose(); 
     }
-    private void btnReserveActionPerformed(ActionEvent evt) {
-        int BusNo = Integer.parseInt(textField1.getText());
-        int Semesters = Integer.parseInt(textField2.getText());
+
+    private void btnSetLocActionPerformed(ActionEvent evt) {
+        //int Semesters = Integer.parseInt(textFSem.getText());
         try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             Connection con=DriverManager.getConnection(  
             "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
              
-            PreparedStatement insert = con.prepareStatement("INSERT INTO Reserved (ID,Date,BusNo,Semesters) VALUES (?,curDate(),?,?) ");
+            PreparedStatement insert = con.prepareStatement("UPDATE Passenger SET city=?, street=?, bldg=? WHERE ID=? ");
+            insert.setString(1,textFCity.getText());
+            insert.setString(2,textFStreet.getText());
+            insert.setString(3,textFBldg.getText());
+            insert.setString(4,p1.getId());
+            insert.executeUpdate();
+            JOptionPane.showMessageDialog(null,"New Location Set!");
+            con.close();  
+        }catch(Exception e){System.out.println(e);}
+        SReserve bs = new SReserve();
+        bs.setVisible(true);
+        bs.pack();
+        this.dispose();
+    }
+
+    private void btnReserveActionPerformed(ActionEvent evt) {
+        Calendar cal = Calendar.getInstance();
+        int Semesters = Integer.parseInt(textFSem.getText());
+        //int day=0;
+        int yr = 0;
+        int month=0;
+        try{  
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
+
+            Statement stmt1=con.createStatement();  
+            ResultSet r=stmt1.executeQuery("SELECT max(endDate) FROM Reserved WHERE ID='"+p1.getId()+"'");
+            r.next();
+            //day = Integer.valueOf((r.getString(1)).substring(8,10));
+            month = Integer.valueOf((r.getString(1)).substring(5,7));
+            yr = Integer.valueOf((r.getString(1)).substring(0,4));
+            if(month == 5){
+                month++;
+            }
+            if(month==12){
+                month=1;
+                yr++;
+            }
+            con.close();
+        }
+        catch(Exception e){
+            yr=cal.get(Calendar.YEAR);
+            month=cal.get(Calendar.MONTH) + 1;
+        }
+        String end;
+        if(month>=1 && month<=5)
+        {
+            if(Semesters == 1){ end = yr+"-05-31";}
+            else{end = yr+"-12-31";}
+        }
+        else{
+            if(Semesters == 1){end = yr+"-12-31";}
+            else
+            {
+                yr = yr+1;
+                end = yr+"-05-31";
+            }
+        }
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/bus_system","root","*Laya2003*");  
+
+            PreparedStatement insert = con.prepareStatement("INSERT INTO Reserved (ID,Date,BusNo,Semesters,EndDate) VALUES (?,curDate(),NULL,?,?) ");
             insert.setString(1,p1.getId());
-            insert.setInt(2,BusNo);
-            insert.setInt(3,Semesters);
+            insert.setInt(2,Semesters);
+            insert.setString(3,end);
             //insert.setString(4,Area);
             insert.executeUpdate();
             JOptionPane.showMessageDialog(null,"Record Added!");
             con.close();  
-        }catch(Exception e){System.out.println(e);}
+        }
+             
+        catch(Exception e){System.out.println(e);}
         SReserve bs = new SReserve();
         bs.setVisible(true);
         bs.pack();
@@ -240,9 +387,13 @@ public class SReserve extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField textField1;
-    private javax.swing.JTextField textField2;
+    private javax.swing.JLabel jLabelCity;
+    private javax.swing.JLabel jLabelStreet;
+    private javax.swing.JLabel jLabelBldg;
+    private javax.swing.JTextField textFCity;
+    private javax.swing.JTextField textFStreet;
+    private javax.swing.JTextField textFBldg;
+    private javax.swing.JTextField textFSem;
     private javax.swing.JDesktopPane dp;
     private javax.swing.JPanel panelStatus;
     private getSReserve p1;
