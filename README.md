@@ -1,4 +1,7 @@
 # Bus Transportation System
+
+It's an application used to make the college bus transportation system efficient.
+
 ER DIAGRAM
 ![image](https://github.com/Laya-Shree/Bus-Transportation-System/assets/113045112/dcc2a13e-fe43-47d8-9bb5-b373fe13a864)
 
@@ -20,9 +23,8 @@ ADMIN - MAKE ANNOUNCEMENTS
 DRIVER PAGE
 ![image](https://github.com/Laya-Shree/Bus-Transportation-System/assets/113045112/fc57e171-7d19-4b52-8c1f-44822ba7a927)
 
-DRIVER PAGE - PASSENGERS NOT USING TRANSPORT AT THAT DAY
+DRIVER PAGE - PASSENGERS NOT USING TRANSPORT ON THAT DAY
 ![image](https://github.com/Laya-Shree/Bus-Transportation-System/assets/113045112/f438ea8c-8e73-4d2c-88ae-025e0dbfad50)
-
 
 STUDENT PAGE
 ![image](https://github.com/Laya-Shree/Bus-Transportation-System/assets/113045112/ab1b0c4d-d751-4a18-8aa9-735548dfa964)
